@@ -18,14 +18,13 @@
     <section class="content">
         <!-- Default box -->
         <div class="container-fluid">
-            <div class="card">
+            <div class="card pt-3">
                 <form action="" method="get">
                     <div class="card-header">
                         <div class="card-title">
-                            <button type="button" onclick="window.location.href='{{ route('orders.index') }}'"
-                                class="btn btn-default btn-sm">Reset</button>
+                            <a href="" class="btn btn-success">Export Excel</a>
                         </div>
-                        <div class="card-tools">
+                        <div class="card-tools d-flex">
                             <div class="input-group input-group" style="width: 250px;">
                                 <input value="{{ Request::get('keyword') }}" type="text" name="keyword"
                                     class="form-control float-right" placeholder="Search">
@@ -36,6 +35,8 @@
                                     </button>
                                 </div>
                             </div>
+                            <button type="button" onclick="window.location.href='{{ route('orders.index') }}'"
+                                class="btn btn-default btn-sm ml-3">Reset</button>
                         </div>
                     </div>
                 </form>
@@ -43,23 +44,35 @@
                     <table class="table table-hover text-nowrap">
                         <thead>
                             <tr>
-                                <th width="60">Orders #</th>
+                                <th width="60">Orders No</th>
                                 <th>Customer</th>
                                 <th>Email</th>
                                 <th>Phone</th>
+                                <th>Payment Method</th>
+                                <th>Product x Qty</th>
                                 <th width="100">Status</th>
                                 <th>Total</th>
-                                <th>Date Purchase</th>
+                                <th>Date Ordered</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if ($orders->isNotEmpty())
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td><a href="{{ route('orders.detail', [$order->id]) }}">{{ $order->id }}</a></td>
+                                        <td><a href="{{ route('orders.detail', [$order->id]) }}">{{ $order->order_no }}</a>
+                                        </td>
                                         <td>{{ $order->name }}</td>
                                         <td>{{ $order->email }}</td>
                                         <td>{{ $order->mobile }}</td>
+                                        <td>{{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }}</td>
+                                        <td>
+                                            <ull>
+                                            @foreach ($order->items as $item)
+                                               <li>{{ $item->name . ' (' . $item->size . ', ' . $item->color . ') ' }} x
+                                                {{ $item->qty }}</li> 
+                                            @endforeach
+                                            </ull>
+                                        </td>
                                         <td>
                                             @if ($order->status == 'pending')
                                                 <span class="badge bg-danger">Pending</span>

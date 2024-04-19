@@ -14,7 +14,7 @@
 
     <section class="section-7 pt-3 mb-3">
         <div class="container">
-            <div class="row ">
+            <div class="row">
                 @include('front.account.common.message')
                 <div class="col-md-5">
                     <div id="product-carousel" class="carousel slide" data-bs-ride="carousel">
@@ -37,8 +37,8 @@
                         </a>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div class="bg-light right">
+                <div class="bg-white col-md-7">
+                    <div class="py-5 right">
                         @php
                             $discount = (($product->compare_price - $product->price) / $product->compare_price) * 100;
                         @endphp
@@ -74,35 +74,36 @@
                             @endif
                             <h2 class="price ">${{ $product->price }}</h2>
                         </div>
-                        <p class="text-secondary">SKU: {{ $product->sku }}-{{ $product->barcode }}</p>
-
+                        <div class="d-flex gap-3">
+                            <p class="text-secondary">SKU: {{ $product->sku }}-{{ $product->barcode }}</p>
+                            <p class="text-secondary">Available Stock: {{ $product->qty }}</p>
+                        </div>
+                        {{-- Variant option --}}
                         @php
                             $sizes = explode(',', $product->size);
                             $colors = explode(',', $product->color);
                         @endphp
-                        <div class="my-3 size-options">
-                            <span class="me-3">Size:</span>
-                            @foreach ($sizes as $size)
-                                <div class="form-check form-check-inline">
-                                    <input class="form-check-input" type="radio" name="size" id="{{ $size }}"
-                                        value="{{ $size }}">
-                                    <label class="form-check-label" for="{{ $size }}">{{ $size }}</label>
-                                </div>
-                            @endforeach
-                        </div>
-                        <div class="my-3 color-options">
-                            @if (!empty($product->color))
-                                <span class="me-3">Color:</span>
-                                @foreach ($colors as $color)
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="color"
-                                            id="{{ $color }}" value="{{ $color }}">
-                                        <label class="form-check-label"
-                                            for="{{ $color }}">{{ $color }}</label>
-                                    </div>
+                        <div class="product__details__option mb-3">
+                            <div class="product__details__option__size form-check-inline">
+                                <span class="me-3 text-secondary">Size:</span>
+                                @foreach ($sizes as $size)
+                                    <label class="form-check-label" for="{{ $size }}">{{ $size }}
+                                        <input class="form-check-input" type="radio" name="size"
+                                            id="{{ $size }}" value="{{ $size }}" />
+                                    </label>
                                 @endforeach
-                            @endif
+                            </div>
+                            <div class="my-3 product__details__option__color form-check-inline">
+                                <span class="me-3 text-secondary">Color:</span>
+                                @foreach ($colors as $color)
+                                    <label class="form-check-label" for="{{ $color }}">{{ $color }}
+                                        <input class="form-check-input" type="radio" name="color"
+                                            id="{{ $color }}" value="{{ $color }}" />
+                                    </label>
+                                @endforeach
+                            </div>
                         </div>
+                        {{-- variant option end --}}
                         @if ($product->track_qty == 'yes')
                             @if ($product->qty > 0)
                                 <a class="btn btn-dark" href="javascript:void(0);"
@@ -289,7 +290,7 @@
                             @endphp
                             <div class="card product-card">
                                 <div class="product-image position-relative">
-                                    <a href="{{ route('front.product', $relProduct->slug) }}" class="product-img">
+                                    <div class="product-img">
                                         @php
                                             $discount =
                                                 (($relProduct->compare_price - $relProduct->price) /
@@ -308,30 +309,32 @@
                                             <img src="{{ asset('admin/img/default-150x150.png') }}"
                                                 class="card-img-topl">
                                         @endif
-                                    </a>
+                                    </div>
                                     <a href="javascript:void(0);" onclick="addWishtlist({{ $relProduct->id }})"
                                         class="whishlist" href="222"><i class="far fa-heart"></i></a>
 
                                     <div class="product-action">
-                                        @if ($product->track_qty == 'yes')
-                                            @if ($product->qty > 0)
-                                                <a class="btn btn-dark" href="javascript:void(0);">
+                                        @if ($relProduct->track_qty == 'yes')
+                                            @if ($relProduct->qty > 0)
+                                                <a class="btn btn-dark"
+                                                    href="{{ route('front.product', $relProduct->slug) }}">
                                                     <i class="fa fa-info-circle"></i> More
                                                 </a>
                                             @else
-                                                <a class="btn btn-dark" href="javascript:void(0);">
+                                                <span class="btn btn-dark">
                                                     Out of Stock
-                                                </a>
+                                                </span>
                                             @endif
                                         @else
-                                            <a class="btn btn-dark" href="javascript:void(0);">
+                                            <a class="btn btn-dark"
+                                                href="{{ route('front.product', $relProduct->slug) }}">
                                                 <i class="fa fa-info-circle"></i> More
                                             </a>
                                         @endif
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="">{{ $relProduct->title }}</a>
+                                    <a class="h6 link" href="{{ route('front.product', $relProduct->slug) }}">{{ $relProduct->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>${{ $relProduct->price }}</strong></span>
                                         @if ($relProduct->compare_price > 0)
@@ -351,8 +354,13 @@
 @push('scripts')
     <script>
         function addToCart(id) {
-            size = $('input[name="size"]:checked').val()
-            color = $('input[name="color"]:checked').val()
+            size = $('input[name="size"]:checked').val();
+            color = $('input[name="color"]:checked').val();
+
+            if (!size || !color) {
+                alert('Please select size or color.');
+                return;
+            }
             $.ajax({
                 url: '{{ route('front.addToCart') }}',
                 type: 'post',
@@ -418,5 +426,20 @@
                 }
             })
         })
+        /*-------------------
+        		Radio Btn
+        	--------------------- */
+        $(".product__details__option__size label").on('click',
+            function() {
+                $(".product__details__option__size label")
+                    .removeClass('active');
+                $(this).addClass('active');
+            });
+        $(".product__details__option__color label").on('click',
+            function() {
+                $(".product__details__option__color label")
+                    .removeClass('active');
+                $(this).addClass('active');
+            });
     </script>
 @endpush

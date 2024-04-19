@@ -6,7 +6,8 @@
             <div class="light-font">
                 <ol class="breadcrumb primary-color mb-0">
                     <li class="breadcrumb-item"><a class="white-text" href="{{ route('account.profile') }}">My Account</a></li>
-                    <li class="breadcrumb-item">Settings</li>
+                    <li class="breadcrumb-item"><a class="white-text" href="{{ route('account.orders') }}">Orders</a></li>
+                    <li class="breadcrumb-item">Order Detail</li>
                 </ol>
             </div>
         </div>
@@ -34,7 +35,7 @@
                                             <h6 class="heading-xxxs text-muted">Order No:</h6>
                                             <!-- Text -->
                                             <p class="mb-lg-0 fs-sm fw-bold">
-                                                {{ $order->id }}
+                                                {{ $order->order_no }}
                                             </p>
                                         </div>
                                         <div class="col-6 col-lg-3">
@@ -69,10 +70,10 @@
                                         </div>
                                         <div class="col-6 col-lg-3">
                                             <!-- Heading -->
-                                            <h6 class="heading-xxxs text-muted">Order Amount:</h6>
+                                            <h6 class="heading-xxxs text-muted">Payment Method:</h6>
                                             <!-- Text -->
                                             <p class="mb-0 fs-sm fw-bold">
-                                                ${{ number_format($order->grand_total, 2) }}
+                                                {{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }} {{ $order->payment_status == 'not_paid' ? ' (Not Paid)' : '' }}
                                             </p>
                                         </div>
                                     </div>
@@ -111,7 +112,7 @@
                                             <div class="col">
                                                 <!-- Title -->
                                                 <p class="mb-4 fs-sm fw-bold">
-                                                    <a class="text-body" href="product.html">{{ $item->name }} x
+                                                    <a class="text-body" href="{{route('front.product',$item->product->slug)}}">{{ $item->name . ' (' . $item->size . ', ' . $item->color . ') ' }} x
                                                         {{ $item->qty }}</a>
                                                     <br>
                                                     <span class="text-muted">${{ number_format($item->total, 2) }}</span>

@@ -209,7 +209,6 @@ class ProductController extends Controller
 
             // save gallery img
 
-
             $request->session()->flash('success', 'Product updated successfully.');
 
             return response()->json([

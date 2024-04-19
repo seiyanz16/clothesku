@@ -194,7 +194,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        // Intervention\Image\ImageServiceProvider::class
+
+        // excel plugins
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ],
 
     /*
@@ -209,8 +211,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Image' => Intervention\Image\Facades\Image::class
-        // 'ExampleClass' => App\Example\ExampleClass::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

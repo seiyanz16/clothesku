@@ -122,7 +122,7 @@
                                     <div class="card product-card">
                                         <div class="product-image position-relative">
 
-                                            <a href="{{ route('front.product', $product->slug) }}" class="product-img">
+                                            <div class="product-img">
                                                 @php
                                                     $discount =
                                                         (($product->compare_price - $product->price) /
@@ -140,7 +140,7 @@
                                                     <img src="{{ asset('admin/img/default-150x150.png') }}"
                                                         class="card-img-top">
                                                 @endif
-                                            </a>
+                                            </div>
 
                                             <a href="javascript:void(0);" onclick="addWishtlist({{ $product->id }})"
                                                 class="whishlist" href="222"><i class="far fa-heart"></i></a>
@@ -148,23 +148,23 @@
                                             <div class="product-action">
                                                 @if ($product->track_qty == 'yes')
                                                     @if ($product->qty > 0)
-                                                        <a class="btn btn-dark" href="javascript:void(0);">
+                                                        <a class="btn btn-dark" href="{{ route('front.product', $product->slug) }}">
                                                             <i class="fa fa-info-circle"></i> More
                                                         </a>
                                                     @else
-                                                        <a class="btn btn-dark" href="javascript:void(0);">
+                                                        <span class="btn btn-dark">
                                                             Out of Stock
-                                                        </a>
+                                                        </span>
                                                     @endif
                                                 @else
-                                                    <a class="btn btn-dark" href="javascript:void(0);">
+                                                    <a class="btn btn-dark" href="{{ route('front.product', $product->slug) }}">
                                                         <i class="fa fa-info-circle"></i> More
                                                     </a>
                                                 @endif
                                             </div>
                                         </div>
                                         <div class="card-body text-center mt-3">
-                                            <a class="h6 link" href="product.php">{{ $product->title }}</a>
+                                            <a class="h6 link" href="{{ route('front.product', $product->slug) }}">{{ $product->title }}</a>
                                             <div class="price mt-2">
                                                 <span class="h5"><strong>${{ $product->price }}</strong></span>
                                                 @if ($product->compare_price > 0)

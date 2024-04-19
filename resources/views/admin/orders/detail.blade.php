@@ -40,6 +40,11 @@
                                     {{-- <b>Invoice #007612</b><br> --}}
                                     {{-- <br> --}}
                                     <b>Order ID:</b> {{ $order->id }}<br>
+                                    <b>Payment Method:</b> {{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }} {{ $order->payment_status == 'not_paid' ? ' (Not Paid)' : '' }}<br>
+                                    @if (!empty($order->payment_method))
+                                        
+                                    <b>Card Number:</b> {{ $order->card_number }}<br>
+                                    @endif
                                     <b>Total:</b> ${{ number_format($order->grand_total, 2) }}<br>
                                     <b>Status:</b>
                                     @if ($order->status == 'pending')
@@ -120,7 +125,7 @@
                                         <option value="delivered" {{ $order->status == 'delivered' ? 'selected' : '' }}>
                                             Delivered</option>
                                         <option value="cancelled" {{ $order->status == 'cancelled' ? 'selected' : '' }}>
-                                            Cancelled</option>
+                                            Canceled</option>
                                     </select>
                                 </div>
                                 <div class="mb-3">
@@ -128,13 +133,21 @@
                                     <input type="text" name="shipped_date" id="shipped_date" class="form-control"
                                         placeholder="Shipped Date" autocomplete="off" value="{{ $order->shipped_date }}">
                                 </div>
+                                <hr>
+                                <h2 class="h4 mb-3">Payment Status</h2>
+                                <div class="mb-3">
+                                    <select name="payment_status" id="payment_status" class="form-control">
+                                        <option {{ $order->payment_status ==  'paid' ? 'selected' : ''}} value="paid">Paid</option>
+                                        <option {{ $order->payment_status ==  'not_paid' ? 'selected' : ''}} value="not_paid">Not Paid</option>
+                                    </select>
+                                </div>
                                 <div class="mb-3">
                                     <button type="submit" class="btn btn-primary">Update</button>
                                 </div>
                             </div>
                         </form>
                     </div>
-                    <div class="card">
+                    {{-- <div class="card">
                         <div class="card-body">
                             <form action="" id="sendInvoiceEmail" name="sendInvoiceEmail" method="post">
                                 <h2 class="h4 mb-3">Send Inovice Email</h2>
@@ -149,7 +162,7 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
@@ -186,18 +199,18 @@
             }
         })
 
-        $('#sendInvoiceEmail').submit(function(event) {
-            event.preventDefault();
+        // $('#sendInvoiceEmail').submit(function(event) {
+        //     event.preventDefault();
 
-            $.ajax({
-                url: '{{ route('orders.sendInvoiceEmail', $order->id) }}',
-                type: 'post',
-                data: $(this).serializeArray(),
-                dataType: 'json',
-                success: function(response) {
-                    window.location.href = '{{ route('orders.detail', $order->id) }}';
-                }
-            })
-        })
+        //     $.ajax({
+        //         url: '{{ route('orders.sendInvoiceEmail', $order->id) }}',
+        //         type: 'post',
+        //         data: $(this).serializeArray(),
+        //         dataType: 'json',
+        //         success: function(response) {
+        //             window.location.href = '{{ route('orders.detail', $order->id) }}';
+        //         }
+        //     })
+        // })
     </script>
 @endpush

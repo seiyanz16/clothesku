@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers\admin;
 
+use App\Exports\OrdersExcelExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -20,7 +22,7 @@ class OrderController extends Controller
             $orders = $orders->orWhere('orders.id', 'like', '%' . $request->keyword . '%');
         }
 
-        $orders = $orders->paginate(10);
+        $orders = $orders->with('items')->paginate(10);
 
         return view('admin.orders.index', [
             'orders' => $orders
@@ -47,6 +49,7 @@ class OrderController extends Controller
         $order = Order::find($id);
         $order->status = $request->status;
         $order->shipped_date = $request->shipped_date;
+        $order->payment_status = $request->payment_status;
         $order->save();
 
         $message = 'Order status updated successfully.';
@@ -59,17 +62,22 @@ class OrderController extends Controller
         ]);
     }
 
-    public function sendInvoiceEmail(Request $request, string $id)
-    {
-        orderEmail($id, $request->userType);
+    // public function sendInvoiceEmail(Request $request, string $id)
+    // {
+    //     orderEmail($id, $request->userType);
 
-        $message = 'Order email sent successfully.';
+    //     $message = 'Order email sent successfully.';
 
-        session()->flash('success', $message);
+    //     session()->flash('success', $message);
 
-        return response()->json([
-            'status' => true,
-            'message' => $message
-        ]);
-    }
+    //     return response()->json([
+    //         'status' => true,
+    //         'message' => $message
+    //     ]);
+    // }
+
+    // public function exportExcel()
+    // {
+    //     return Excel::download(new OrdersExcelExport, 'OrdersData.xlsx');
+    // }
 }

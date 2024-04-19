@@ -14,13 +14,16 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->string('order_no');
             $table->double('subtotal', 10, 2);
             $table->double('shipping', 10, 2);
             $table->string('coupon_code')->nullable();
             $table->int('coupon_code_id')->nullable();
             $table->double('discount', 10, 2)->nullable();
             $table->double('grand_total', 10, 2);
-            $table->enum('payment_status',['paid','not paid'])->default('not paid');
+            $table->string('payment_method')->default('cod');
+            $table->int('card_number')->nullable();
+            $table->enum('payment_status',['paid','not_paid'])->default('not_paid');
             $table->enum('status', ['pending', 'shipped', 'delivered','cancelled'])->default('pending');
             $table->datetime('shipped_date')->nullable();
 

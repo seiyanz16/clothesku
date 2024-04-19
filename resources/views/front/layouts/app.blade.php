@@ -54,57 +54,25 @@
 
 <body data-instant-intensity="mousedown">
 
-    <div class="bg-light top-header">
+    <header class="bg-white my-3">
         <div class="container">
-            <div class="row align-items-center py-3 d-none d-lg-flex justify-content-between">
-                <div class="col-lg-4 logo">
-                    <a href="{{ route('front.home') }}" class="text-decoration-none">
-                        {{-- <span class="h1 text-uppercase text-primary bg-dark px-2">Online</span>
-                        <span class="h1 text-uppercase text-dark bg-primary px-2 ml-n1">SHOP</span> --}}
-                        <img src="{{ asset('front/images/logo.png') }}" alt="logo" style="max-width: 150px;">
-                    </a>
-                </div>
-                <div class="col-lg-6 col-6 text-left  d-flex justify-content-end align-items-center">
-                    @if (Auth::check())
-                        <a href="{{ route('account.profile') }}" class="nav-link text-dark">My Account</a>
-                    @else
-                        <a href="{{ route('account.login') }}" class="nav-link text-dark">Login/Register</a>
-                    @endif
-                    <form action="{{ route('front.shop') }}" method="get">
-                        <div class="input-group rounded">
-                            <input value="{{ Request::get('search') }}" type="text"
-                                placeholder="Search For Products" class="form-control rounded" name="search"
-                                id="search" aria-describedby="search-addon" />
-                            <button type="submit" class="input-group-text input-group-text border-0"
-                                id="search-addon">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <header class="bg-dark">
-        <div class="container">
-            <nav class="navbar navbar-expand-xl" id="navbar">
-                <a href="{{ route('front.home') }}" class="text-decoration-none mobile-logo">
-                    <span class="h2 text-uppercase text-primary bg-dark">Online</span>
-                    <span class="h2 text-uppercase text-white px-2">SHOP</span>
+            <nav class="navbar navbar-expand-xl gap-5" id="navbar">
+                <a href="{{ route('front.home') }}" class="text-decoration-none">
+                    <span class="h4 text-uppercase fw-bold text-dark" style="letter-spacing: 2px;">Clothes<span
+                            class="text-danger">.Ku</span></span>
+                    {{-- <img src="{{ asset('front/images/logo.png') }}" alt="logo" style="max-width: 150px;"> --}}
                 </a>
                 <button class="navbar-toggler menu-btn" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
-                    <!-- <span class="navbar-toggler-icon icon-menu"></span> -->
-                    <i class="navbar-toggler-icon fas fa-bars"></i>
+                    <i class="navbar-toggler-icon fas fa-bars text-dark"></i>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                         @if (getCategories()->isNotEmpty())
                             @foreach (getCategories() as $category)
                                 <li class="nav-item dropdown">
-                                    <button class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                                    <button class="btn btn-dark dropdown-toggle text-dark" data-bs-toggle="dropdown"
                                         aria-expanded="false">
                                         {{ $category->name }}
                                     </button>
@@ -122,14 +90,42 @@
                         @endif
                     </ul>
                 </div>
-                <div class="right-nav py-0">
-                    <div class="d-flex gap-3">
-                        <a href="{{ route('account.wishlist') }}" class="ml-3 d-flex pt-2">
-                            <i class="far fa-heart text-primary"></i>
-                        </a>
-                        <a href="{{ route('front.cart') }}" class="ml-3 d-flex pt-2">
-                            <i class="fas fa-shopping-cart text-primary"></i>
-                        </a>
+                <div class="navbar-right py-0 d-flex gap-3 align-items-center">
+                    <form action="{{ route('front.shop') }}" method="get">
+                        <div class="input-group rounded">
+                            <input value="{{ Request::get('search') }}" type="text"
+                                placeholder="Search For Products" class="form-control rounded" name="search"
+                                id="search" aria-describedby="search-addon" />
+                            <button type="submit" class="input-group-text input-group-text border-0"
+                                id="search-addon">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </form>
+                    <a href="{{ route('account.wishlist') }}" class="ml-3 d-flex">
+                        <i class="far fa-heart text-dark"></i>
+                    </a>
+                    <a href="{{ route('front.cart') }}" class="ml-3 d-flex">
+                        <i class="fas fa-shopping-cart text-dark"></i>
+                    </a>
+                    <div class="dropdown ml-3">
+                        <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user text-dark"></i>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
+                            @if (Auth::check())
+                                <li><a class="dropdown-item" href="{{ route('account.profile') }}">My Account</a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="{{ route('account.logout') }}">Logout</a></li>
+                            @else
+                                <li><a class="dropdown-item" href="{{ route('account.login') }}">Login/Register</a>
+                                </li>
+                            @endif
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -140,7 +136,7 @@
         @yield('content')
     </main>
 
-    <footer class="bg-dark mt-5">
+    <footer class="mt-5">
         <div class="container pb-5 pt-3">
             <div class="row">
                 <div class="col-md-4">
@@ -170,15 +166,17 @@
 
                 <div class="col-md-4">
                     <div class="footer-card">
+                        <h3>My Account</h3>
                         @if (Auth::check())
-                            <h3>My Account</h3>
+                            <ul>
+                                <li><a href="{{ route('account.orders') }}" title="Contact Us">My Orders</a></li>
+                                <li><a href="{{ route('account.logout') }}" title="Contact Us">Logout</a></li>
+                            </ul>
+                        @else
                             <ul>
                                 <li><a href="{{ route('account.login') }}" title="Sell">Login</a></li>
                                 <li><a href="{{ route('account.register') }}" title="Advertise">Register</a></li>
-                                <li><a href="{{ route('account.orders') }}" title="Contact Us">My Orders</a></li>
                             </ul>
-                        @else
-                            <div></div>
                         @endif
                     </div>
                 </div>
@@ -189,7 +187,7 @@
                 <div class="row">
                     <div class="col-12 mt-3">
                         <div class="copy-right text-center">
-                            <p>© Copyright 2024 Clothes.Ku All Rights Reserved</p>
+                            <p>© Copyright 2024 Zaskia. All Rights Reserved</p>
                         </div>
                     </div>
                 </div>

@@ -40,14 +40,18 @@ class CartController extends Controller
 
             foreach ($cartContent as $item) {
                 if ($item->id == $product->id) {
-                    $productAlreadyExist = true;
+                    if ($item->options->size == $request->size && $item->options->color == $request->color) {
+                        $productAlreadyExist = true;
+                    }
                 }
             }
 
             if ($productAlreadyExist == false) {
-                Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
+                Cart::add($product->id, $product->title, 1, $product->price, [
+                    'productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
                     'size' => $request->size,
-                    'color' => $request->color]);
+                    'color' => $request->color
+                ]);
 
                 $status = true;
                 $message = '<strong>' . $product->title . '</strong> added to cart successfully.';
@@ -58,9 +62,11 @@ class CartController extends Controller
             }
 
         } else {
-            Cart::add($product->id, $product->title, 1, $product->price, ['productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
+            Cart::add($product->id, $product->title, 1, $product->price, [
+                'productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
                 'size' => $request->size,
-                'color' => $request->color,]);
+                'color' => $request->color,
+            ]);
             $status = true;
             $message = '<strong>' . $product->title . '</strong> added to cart successfully.';
             session()->flash('success', $message);
@@ -190,7 +196,7 @@ class CartController extends Controller
                 $totalQty += $item->qty;
             }
 
-            $totalShippingCharge = $totalQty * $shippingInfo->amount;
+            $totalShippingCharge = $shippingInfo->amount;
 
             $grandTotal = ($subTotal - $discount) + $totalShippingCharge;
         } else {
@@ -251,122 +257,136 @@ class CartController extends Controller
 
         // step - 3 store data di table orders
 
-        if ($request->payment_method == 'cod') {
+        // if ($request->payment_method == 'cod') {
 
-            $couponCodeId = null;
-            $code = null;
-            $shipping = 0;
-            $discount = 0;
-            $subTotal = Cart::subtotal(2, '.', '');
+        $couponCodeId = null;
+        $code = null;
+        $shipping = 0;
+        $discount = 0;
+        $subTotal = Cart::subtotal(2, '.', '');
 
 
-            // apply discount here
+        // apply discount here
 
-            if (session()->has('code')) {
-                $code = session()->get('code');
-                if ($code->type == 'percent') {
-                    $discount = ($code->discount_amount / 100) * $subTotal;
-                } else {
-                    $discount = $code->discount_amount;
-                }
-
-                $couponCodeId = $code->id;
-                $code = $code->code;
-            }
-
-            //itung ongkir
-            $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
-            $totalQty = 0;
-            foreach (Cart::content() as $item) {
-                $totalQty += $item->qty;
-            }
-
-            if ($shippingInfo != null) {
-                $shipping = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shipping;
-
+        if (session()->has('code')) {
+            $code = session()->get('code');
+            if ($code->type == 'percent') {
+                $discount = ($code->discount_amount / 100) * $subTotal;
             } else {
-                $shippingInfo = ShippingCharge::where('country_id', 'rest_of_world')->first();
-
-                $shipping = $totalQty * $shippingInfo->amount;
-                $grandTotal = ($subTotal - $discount) + $shipping;
+                $discount = $code->discount_amount;
             }
 
-            $order = new Order;
-            $order->subtotal = $subTotal;
-            $order->shipping = $shipping;
-            $order->grand_total = $grandTotal;
-            $order->discount = $discount;
-            $order->coupon_code_id = $couponCodeId;
-            $order->coupon_code = $code;
-            $order->payment_status = 'not paid';
-            $order->status = 'pending';
+            $couponCodeId = $code->id;
+            $code = $code->code;
+        }
 
-            $order->first_name = $request->first_name;
-            $order->last_name = $request->last_name;
-            $order->email = $request->email;
-            $order->user_id = $user->id;
-            $order->mobile = $request->mobile;
-            $order->country_id = $request->country;
-            $order->address = $request->address;
-            $order->apartement = $request->apartement;
-            $order->city = $request->city;
-            $order->state = $request->state;
-            $order->zip = $request->zip;
-            $order->notes = $request->order_notes;
-            $order->save();
+        //itung ongkir
+        $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
+        $totalQty = 0;
+        foreach (Cart::content() as $item) {
+            $totalQty += $item->qty;
+        }
 
-            //step -4 store order items
-
-            foreach (Cart::content() as $item) {
-
-                $orderItem = new OrderItem;
-                $orderItem->product_id = $item->id;
-                $orderItem->order_id = $order->id;
-                $orderItem->name = $item->name;
-                $orderItem->size = $item->options->size;
-                $orderItem->color = $item->options->color;
-                $orderItem->qty = $item->qty;
-                $orderItem->price = $item->price;
-                $orderItem->total = $item->qty * $item->price;
-                $orderItem->save();
-
-                // update stok produk
-
-                $productData = Product::find($item->id);
-                if($productData->track_qty == 'yes'){
-                    $currentQty = $productData->qty;
-                    $updatedQty = $currentQty - $item->qty;
-                    $productData->qty = $updatedQty;
-                    $productData->save();
-                }
-            }
-            
-            // send email
-            // OrderEmail($order->id);
-
-            session()->flash('success', 'Ordered Successfully.');
-
-            Cart::destroy();
-
-            session()->forget('code');
-
-            return response()->json([
-                'message' => 'Order saved successfully.',
-                'orderId' => $order->id,
-                'status' => true,
-            ]);
-
+        if ($shippingInfo != null) {
+            $shipping = $shippingInfo->amount;
+            $grandTotal = ($subTotal - $discount) + $shipping;
 
         } else {
+            $shippingInfo = ShippingCharge::where('country_id', 'rest_of_world')->first();
 
+            $shipping = $totalQty * $shippingInfo->amount;
+            $grandTotal = ($subTotal - $discount) + $shipping;
         }
+
+        $lastOrder = Order::latest()->first();
+        $LastOrderNo = $lastOrder ? intval(substr($lastOrder->order_no, 5)) : 0;
+        $nextOrder = $LastOrderNo + 1;
+        $formatOrder = '#ORD-' . str_pad($nextOrder, 5, 0, STR_PAD_LEFT);
+
+        $order = new Order;
+        $order->order_no = $formatOrder;
+        $order->subtotal = $subTotal;
+        $order->shipping = $shipping;
+        $order->grand_total = $grandTotal;
+        $order->discount = $discount;
+        $order->coupon_code_id = $couponCodeId;
+        $order->coupon_code = $code;
+        $order->payment_status = 'not_paid';
+        $order->payment_method = $request->payment_method;
+        if ($request->payment_method == 'transfer') {
+            $order->payment_status = 'paid';
+            $order->card_number = $request->card_number;
+        }
+        $order->status = 'pending';
+
+        $order->first_name = $request->first_name;
+        $order->last_name = $request->last_name;
+        $order->email = $request->email;
+        $order->user_id = $user->id;
+        $order->mobile = $request->mobile;
+        $order->country_id = $request->country;
+        $order->address = $request->address;
+        $order->apartement = $request->apartement;
+        $order->city = $request->city;
+        $order->state = $request->state;
+        $order->zip = $request->zip;
+        $order->notes = $request->order_notes;
+        $order->save();
+
+        //step -4 store order items
+
+        foreach (Cart::content() as $item) {
+
+            $orderItem = new OrderItem;
+            $orderItem->product_id = $item->id;
+            $orderItem->order_id = $order->id;
+            $orderItem->name = $item->name;
+            $orderItem->size = $item->options->size;
+            $orderItem->color = $item->options->color;
+            $orderItem->qty = $item->qty;
+            $orderItem->price = $item->price;
+            $orderItem->total = $item->qty * $item->price;
+            $orderItem->save();
+
+            // update stok produk
+
+            $productData = Product::find($item->id);
+            if ($productData->track_qty == 'yes') {
+                $currentQty = $productData->qty;
+                $updatedQty = $currentQty - $item->qty;
+                $productData->qty = $updatedQty;
+                $productData->save();
+            }
+        }
+
+        // send email
+        // OrderEmail($order->id);
+
+        session()->flash('success', 'Ordered Successfully.');
+
+        Cart::destroy();
+
+        session()->forget('code');
+
+        return response()->json([
+            'message' => 'Order saved successfully.',
+            'orderId' => $order->id,
+            'status' => true,
+        ]);
+
+
+        // } else {
+
+        // }
     }
 
     public function thankYou($id)
     {
+        $order = Order::where('id', $id)->first();
+
         return view('front.thanks', [
-            'id' => $id
+            'id' => $id,
+            'orderNo' => $order->order_no,
         ]);
     }
 
@@ -402,13 +422,13 @@ class CartController extends Controller
             }
 
             if ($shippingInfo != null) {
-                $shippingCharge = $totalQty * $shippingInfo->amount;
+                $shippingCharge = $shippingInfo->amount;
                 $grandTotal = ($subTotal - $discount) + $shippingCharge;
 
                 return response()->json([
                     'status' => true,
                     'grandTotal' => number_format($grandTotal, 2),
-                    'discount' => number_format($discount,2),
+                    'discount' => number_format($discount, 2),
                     'discountString' => $discountString,
                     'shippingCharge' => number_format($shippingCharge, 2)
                 ]);
@@ -421,7 +441,7 @@ class CartController extends Controller
                 return response()->json([
                     'status' => true,
                     'grandTotal' => number_format($grandTotal, 2),
-                    'discount' => number_format($discount,2),
+                    'discount' => number_format($discount, 2),
                     'discountString' => $discountString,
                     'shippingCharge' => number_format($shippingCharge, 2)
                 ]);
@@ -430,7 +450,7 @@ class CartController extends Controller
             return response()->json([
                 'status' => true,
                 'grandTotal' => number_format(($subTotal - $discount), 2),
-                'discount' => number_format($discount,2),
+                'discount' => number_format($discount, 2),
                 'discountString' => $discountString,
                 'shippingCharge' => number_format(0, 2)
             ]);
@@ -509,7 +529,7 @@ class CartController extends Controller
             if ($subTotal < $code->min_amount) {
                 return response()->json([
                     'status' => false,
-                    'message' => 'Your min amount must be $'. $code->min_amount . '.',
+                    'message' => 'Your min amount must be $' . $code->min_amount . '.',
                 ]);
             }
         }

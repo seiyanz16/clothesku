@@ -100,7 +100,63 @@
 .slick-arrow.slick-hidden {
     display: none;
 }
+.cart-else {
+    height: 10rem;
+}
 
+header.bg-white {
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px -1px 1px rgba(0, 0, 0, 0.1);
+}
+.card-img-overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.cat-card {
+    width: 80%;
+}
+.cat-card img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+/* PRODUCT PAGE STYLE */
+/* variant option */
+.product__details__option__size,
+.product__details__option__color {
+    display: inline-block;
+    margin-right: 50px;
+}
+.product__details__option__size label input[type="radio"],
+.product__details__option__color label input[type="radio"] {
+    opacity: 0;
+    position: absolute;
+    pointer-events: none;
+}
+@media only screen and (max-width: 767px) .product__details__option__size,
+    .product__details__option__color {
+    display: block;
+    margin-right: 0;
+    margin-bottom: 25px;
+}
+.product__details__option__size label,
+.product__details__option__color label {
+    background: white;
+    color: #111111;
+    font-size: 15px;
+    font-weight: 700;
+    text-transform: uppercase;
+    display: inline-block;
+    border: 1px solid #e5e5e5;
+    padding: 6px 15px;
+    margin-bottom: 0;
+    margin-right: 5px;
+    cursor: pointer;
+}
+.product__details__option__size label.active,
+.product__details__option__color label.active {
+    background: #111111;
+    color: #ffffff;
+    border-color: #111111;
+}
 /* rating  */
 .rating {
     direction: rtl;
@@ -153,4 +209,32 @@
 
 .star-rating.product {
     font-size: 1em;
+}
+
+/* CHECKOUT PAGE */
+.checkout__order__products {
+    width: 100%;
+}
+
+.checkout__order__products th:not(:first-child),
+.checkout__order__products td:not(:first-child) {
+    padding: 2px;
+    text-align: center;
+}
+
+.checkout__order__products th,
+.checkout__order__products td {
+    border-bottom: 1px solid #ddd;
+}
+.checkout__order__products .product-name {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.checkout__order__products .product-name span {
+    display: inline;
+}
+
+.checkout__order__products .product-name br {
+    display: none;
 }

@@ -36,7 +36,7 @@
                         <div class="table-responsive">
                             <table class="table" id="cart">
                                 <thead>
-                                    <tr>
+                                    <tr class="btn-dark">
                                         <th>Item</th>
                                         <th>Price</th>
                                         <th>Quantity</th>
@@ -71,8 +71,8 @@
                                                         </button>
                                                     </div>
                                                     <input type="text"
-                                                        class="form-control form-control-sm  border-0 text-center"
-                                                        value="{{ $item->qty }}">
+                                                        class="form-control form-control-sm  border-0 text-center bg-white"
+                                                        value="{{ $item->qty }}" readonly>
                                                     <div class="input-group-btn">
                                                         <button class="btn btn-sm btn-dark btn-plus p-2 pt-1 pb-1 add"
                                                             data-id="{{ $item->rowId }}">
@@ -114,9 +114,10 @@
                     </div>
                 @else
                     <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-body d-flex justify-content-center align-items-center">
-                                <h4>Your Cart is empty!</h4>
+                        <div class="card cart-else">
+                            <div class="card-body" align="center">
+                                <h4 class="mt-5">Your Cart is empty!</h4>
+                                <h5><a class="link text-primary" href="{{route('front.shop')}}"> Shop now!</a></h5>
                             </div>
                         </div>
                     </div>

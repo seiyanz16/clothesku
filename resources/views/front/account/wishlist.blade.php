@@ -5,7 +5,7 @@
             <div class="light-font">
                 <ol class="breadcrumb primary-color mb-0">
                     <li class="breadcrumb-item"><a class="white-text" href="{{ route('account.profile') }}">My Account</a></li>
-                    <li class="breadcrumb-item">Settings</li>
+                    <li class="breadcrumb-item">Wishlist</li>
                 </ol>
             </div>
         </div>
@@ -71,7 +71,7 @@
                                 @endforeach
                             @else
                             <div>
-                                <h3>Your wishlist is empty!</h3>
+                                <h3>Your wishlist is empty! <a class="h6 link text-primary" href="{{route('front.shop')}}"> Add now!</a></h3>
                             </div>
                             @endif
                         </div>

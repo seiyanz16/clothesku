@@ -12,13 +12,13 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::latest();
+        $users = User::where('role', '!=', 1);;
         if (!empty($request->get('keyword'))) {
             $users = $users->where('name', 'like', '%' . $request->get('keyword') . '%')
                 ->orWhere('email', 'like', '%' . $request->get('keyword') . '%')
                 ->orWhere('phone', 'like', '%' . $request->get('keyword') . '%');
         }
-        $users = $users->paginate(10);
+        $users = $users->latest()->paginate(10);
 
         return view('admin.user.index',compact('users'));
     }

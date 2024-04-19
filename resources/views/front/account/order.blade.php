@@ -6,7 +6,7 @@
             <div class="light-font">
                 <ol class="breadcrumb primary-color mb-0">
                     <li class="breadcrumb-item"><a class="white-text" href="{{ route('account.profile') }}">My Account</a></li>
-                    <li class="breadcrumb-item">Settings</li>
+                    <li class="breadcrumb-item">Orders</li>
                 </ol>
             </div>
         </div>
@@ -40,7 +40,7 @@
                                                 <tr>
                                                     <td>
                                                         <a
-                                                            href="{{ route('account.orderDetail', $order->id) }}">{{ $order->id }}</a>
+                                                            href="{{ route('account.orderDetail', $order->id) }}">{{ $order->order_no }}</a>
                                                     </td>
                                                     <td>{{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}
                                                     </td>
@@ -61,7 +61,7 @@
                                             @endforeach
                                         @else
                                             <tr>
-                                                <td colspan="3">Order now!</td>
+                                                <td colspan="4" align="center">Ups! You haven't ordered yet. <a class="link text-primary" href="{{route('front.shop')}}"> Shop now!</a></td>
                                             </tr>
                                         @endif
                                     </tbody>

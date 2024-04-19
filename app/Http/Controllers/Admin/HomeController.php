@@ -41,7 +41,7 @@ class HomeController extends Controller
             ->sum('grand_total');
 
         // apus temp image
-        $aWeekBefore = Carbon::now()->subDays(7)->format('Y-m-d');
+        $aWeekBefore = Carbon::now()->subDays(1)->format('Y-m-d');
         $tempImages = TempImage::where('created_at', '<=', $aWeekBefore)->get();
 
         foreach ($tempImages as $tempImage) {
@@ -79,30 +79,5 @@ class HomeController extends Controller
     {
         Auth::guard('admin')->logout();
         return redirect()->route('admin.login');
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show(string $id)
-    {
-        //
-    }
-
-    public function edit(string $id)
-    {
-        //
-    }
-
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    public function destroy(string $id)
-    {
-        //
     }
 }

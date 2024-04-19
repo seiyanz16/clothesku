@@ -48,7 +48,7 @@
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link p-0 pr-3" data-toggle="dropdown" href="#">
-                        <img src="{{ asset('admin/img/avatar5.png') }}" class='img-circle elevation-2' width="40"
+                        <img src="{{ asset('admin/img/hanwool.jpg') }}" class='img-circle elevation-2' width="40"
                             height="40" alt="">
                     </a>
                     <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right p-3">
@@ -80,7 +80,7 @@
         <!-- /.content-wrapper -->
         <footer class="main-footer">
 
-            <strong>Copyright &copy; 2014-2022 AmazingShop All rights reserved.
+            <strong>Copyright &copy; 2024 Zaskia All rights reserved.
         </footer>
 
     </div>
