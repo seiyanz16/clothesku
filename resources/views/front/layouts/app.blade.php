@@ -3,7 +3,7 @@
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>{{ config('app.name') }}</title>
+    <title>@yield('title') {{ config('app.name') }}</title>
     <meta name="description" content="" />
     <meta name="viewport"
         content="width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=no" />
@@ -46,7 +46,7 @@
         rel="stylesheet">
 
     <!-- Fav Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="#" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.png')}}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 

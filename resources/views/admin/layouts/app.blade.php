@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Dashboard | {{ config('app.name') }}</title>
+    <title>@yield('title') | Admin {{ config('app.name') }}</title>
     <!-- Google Font: Source Sans Pro -->
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/datetimepicker.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.png')}}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 </head>

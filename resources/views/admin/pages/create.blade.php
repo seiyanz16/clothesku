@@ -1,3 +1,4 @@
+@section('title', 'Create Page')
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->

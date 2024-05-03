@@ -1,3 +1,4 @@
+@section('title', 'Discount Coupons')
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->

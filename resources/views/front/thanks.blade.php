@@ -1,3 +1,5 @@
+@section('title', 'Thank You! |')
+
 @extends('front.layouts.app')
 
 @section('content')

@@ -1,3 +1,4 @@
+@section('title', 'Change Password Admin')
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->

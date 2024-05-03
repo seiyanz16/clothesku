@@ -1,3 +1,4 @@
+@section('title', 'Edit Product')
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->

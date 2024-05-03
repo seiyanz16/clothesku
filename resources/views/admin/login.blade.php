@@ -13,6 +13,7 @@
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('admin/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.png')}}" />
 
     {{-- cute-alert --}}
     <link rel="stylesheet" href="{{ asset('admin/js/cute-alert/style.css') }}">

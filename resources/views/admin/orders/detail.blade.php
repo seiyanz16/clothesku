@@ -1,3 +1,4 @@
+@section('title', 'Detail Order '. $order->order_no)
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->
@@ -5,7 +6,7 @@
         <div class="container-fluid my-2">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Order: #{{ $order->id }}</h1>
+                    <h1>Order: {{ $order->order_no }}</h1>
                 </div>
                 <div class="col-sm-6 text-right">
                     <a href="{{ route('orders.index') }}" class="btn btn-primary">Back</a>
@@ -39,7 +40,7 @@
                                 <div class="col-sm-4 invoice-col">
                                     {{-- <b>Invoice #007612</b><br> --}}
                                     {{-- <br> --}}
-                                    <b>Order ID:</b> {{ $order->id }}<br>
+                                    <b>Order No:</b> {{ $order->order_no }}<br>
                                     <b>Payment Method:</b> {{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }} {{ $order->payment_status == 'not_paid' ? ' (Not Paid)' : '' }}<br>
                                     @if (!empty($order->payment_method))
                                         

@@ -1,5 +1,5 @@
+@section('title','Orders '. $order->order_no.' |')
 @extends('front.layouts.app')
-
 @section('content')
     <section class="section-5 pt-3 pb-3 mb-3 bg-white">
         <div class="container">

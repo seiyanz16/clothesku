@@ -1,3 +1,4 @@
+@section('title', 'Products')
 @extends('admin.layouts.app')
 @section('content')
     <!-- Content Header (Page header) -->
@@ -71,7 +72,7 @@
                                                     class="img-thumbnail" width="50">
                                             @endif
                                         </td>
-                                        <td><a href="#">{{ $product->title }}</a></td>
+                                        <td><a href="{{ route('products.edit', $product->id) }}">{{ $product->title }}</a></td>
                                         <td>{{ $product->price }}</td>
                                         <td>{{ $product->qty }} left in Stock</td>
                                         <td>{{ $product->sku }} - {{ $product->barcode }}</td>
