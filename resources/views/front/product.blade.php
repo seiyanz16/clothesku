@@ -76,7 +76,11 @@
                         </div>
                         <div class="d-flex gap-3">
                             <p class="text-secondary">SKU: {{ $product->sku }}-{{ $product->barcode }}</p>
-                            <p class="text-secondary">Available Stock: {{ $product->qty }}</p>
+                            @if ($product->track_qty == 'yes')
+                                <p class="text-secondary">Available Stock: {{ $product->qty }}</p>
+                            @else
+                                <p></p>
+                            @endif
                         </div>
                         {{-- Variant option --}}
                         @php
@@ -104,22 +108,26 @@
                             </div>
                         </div>
                         {{-- variant option end --}}
-                        @if ($product->track_qty == 'yes')
-                            @if ($product->qty > 0)
-                                <a class="btn btn-dark" href="javascript:void(0);"
-                                    onclick="addToCart({{ $product->id }})">
+                        <div class="d-flex gap-3 align-items-center" style="letter-spacing: 1px">
+                            @if ($product->track_qty == 'yes')
+                                @if ($product->qty > 0)
+                                    <a class="btn btn-dark" href="javascript:void(0);"
+                                        onclick="addToCart({{ $product->id }})">
+                                        <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
+                                    </a>
+                                @else
+                                    <a class="btn btn-dark" href="javascript:void(0);">
+                                        Out of Stock
+                                    </a>
+                                @endif
+                            @else
+                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
                                     <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
                                 </a>
-                            @else
-                                <a class="btn btn-dark" href="javascript:void(0);">
-                                    Out of Stock
-                                </a>
                             @endif
-                        @else
-                            <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
-                                <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
-                            </a>
-                        @endif
+                            <a class="btn link" href="javascript:void(0);" onclick="addWishtlist({{ $product->id }})" class="whishlist"
+                                href="222"><i class="fa fa-heart"></i> ADD TO WISHLIST</a>
+                        </div>
                     </div>
                 </div>
 
@@ -334,7 +342,8 @@
                                     </div>
                                 </div>
                                 <div class="card-body text-center mt-3">
-                                    <a class="h6 link" href="{{ route('front.product', $relProduct->slug) }}">{{ $relProduct->title }}</a>
+                                    <a class="h6 link"
+                                        href="{{ route('front.product', $relProduct->slug) }}">{{ $relProduct->title }}</a>
                                     <div class="price mt-2">
                                         <span class="h5"><strong>${{ $relProduct->price }}</strong></span>
                                         @if ($relProduct->compare_price > 0)

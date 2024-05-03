@@ -21,7 +21,7 @@
 <body class="hold-transition login-page">
     <div class="login-box">
         <!-- /.login-logo -->
-        <div class="card card-outline card-primary">
+        <div class="card card-outline card-dark">
             <div class="card-header text-center">
                 <a href="#" class="h3">Admin Panel</a>
             </div>
@@ -64,13 +64,13 @@
        </div> -->
                         <!-- /.col -->
                         <div class="col-4">
-                            <button type="submit" class="btn btn-primary btn-block">Login</button>
+                            <button type="submit" class="btn btn-dark btn-block">Login</button>
                         </div>
                         <!-- /.col -->
                     </div>
                 </form>
                 <p class="mb-1 mt-3">
-                    <a href="forgot-password.html">I forgot my password</a>
+                    <a class="text-danger" href="forgot-password.html">I forgot my password</a>
                 </p>
             </div>
             <!-- /.card-body -->
