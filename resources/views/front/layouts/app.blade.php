@@ -37,8 +37,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/slick-theme.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/style.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('front/css/ion.rangeSlider.min.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('front/plugins/fontawesome-free/css/all.min.css') }}" />
 
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet"> --}}
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
