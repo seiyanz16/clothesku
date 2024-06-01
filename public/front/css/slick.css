@@ -103,7 +103,20 @@
 .cart-else {
     height: 10rem;
 }
+.cart-icon {
+    position: relative;
+}
 
+.cart-item-count {
+    position: absolute;
+    top: -12px;
+    right: -12px;
+    background-color: #dc3545;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
 header.bg-white {
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1), 0px -1px 1px rgba(0, 0, 0, 0.1);
 }

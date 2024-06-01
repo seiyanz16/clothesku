@@ -17,6 +17,19 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 
 class CartController extends Controller
 {
+    private $user;
+    private $cartInstance;
+
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+            if ($this->user) {
+                $this->cartInstance = Cart::instance('cart_' . $this->user->id);
+            }
+            return $next($request);
+        });
+    }
     public function addToCart(Request $request)
     {
         $product = Product::with('product_images')->find($request->id);
@@ -28,31 +41,27 @@ class CartController extends Controller
             ]);
         }
 
-        if (Cart::count() > 0) {
-            // echo "product already in!";
-            // product found in cart
-            // check if this product already in the cart
-            // return as message that product already in 
-            // if product not found, then add product in cart
+        if ($this->cartInstance->count() > 0) {
 
-            $cartContent = Cart::content();
+            $cartContent = $this->cartInstance->content();
             $productAlreadyExist = false;
 
             foreach ($cartContent as $item) {
                 if ($item->id == $product->id) {
                     if ($item->options->size == $request->size && $item->options->color == $request->color) {
                         $productAlreadyExist = true;
+                        break;
                     }
                 }
             }
 
             if ($productAlreadyExist == false) {
-                Cart::add($product->id, $product->title, 1, $product->price, [
+                $this->cartInstance->add($product->id, $product->title, 1, $product->price, [
+                    'user_id' => $this->user->id,
                     'productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
                     'size' => $request->size,
-                    'color' => $request->color
+                    'color' => $request->color,
                 ]);
-
                 $status = true;
                 $message = '<strong>' . $product->title . '</strong> added to cart successfully.';
                 session()->flash('success', $message);
@@ -62,15 +71,15 @@ class CartController extends Controller
             }
 
         } else {
-            Cart::add($product->id, $product->title, 1, $product->price, [
+            $this->cartInstance->add($product->id, $product->title, 1, $product->price, [
+                'user_id' => $this->user->id,
                 'productImage' => (!empty($product->product_images)) ? $product->product_images->first() : '',
                 'size' => $request->size,
-                'color' => $request->color,
+                'color' => $request->color
             ]);
             $status = true;
             $message = '<strong>' . $product->title . '</strong> added to cart successfully.';
             session()->flash('success', $message);
-
         }
 
         return response()->json([
@@ -82,8 +91,11 @@ class CartController extends Controller
 
     public function cart()
     {
-        $cartContent = Cart::content();
+        $cartContent = $this->cartInstance->content();
+        $cartSubtotal = $this->cartInstance->subtotal();
         $data['cartContent'] = $cartContent;
+        $data['cartSubtotal'] = $cartSubtotal;
+
         return view('front.cart', $data);
     }
 
@@ -92,13 +104,13 @@ class CartController extends Controller
         $rowId = $request->rowId;
         $qty = $request->qty;
 
-        $itemInfo = Cart::get($rowId);
+        $itemInfo = $this->cartInstance->get($rowId);
         $product = Product::find($itemInfo->id);
 
-        //check qty available in stock
+        //check qty available in stock`
         if ($product->track_qty == 'yes') {
             if ($qty <= $product->qty) {
-                Cart::update($rowId, $qty);
+                $this->cartInstance->update($rowId, $qty);
                 $message = 'Cart updated successfully.';
                 $status = true;
                 session()->flash('success', $message);
@@ -110,11 +122,10 @@ class CartController extends Controller
 
             }
         } else {
-            Cart::update($rowId, $qty);
+            $this->cartInstance->update($rowId, $qty);
             $message = 'Cart updated successfully.';
             $status = true;
             session()->flash('success', $message);
-
         }
 
         return response()->json([
@@ -125,8 +136,7 @@ class CartController extends Controller
 
     public function deleteItem(Request $request)
     {
-
-        $itemInfo = Cart::get($request->rowId);
+        $itemInfo = $this->cartInstance->get($request->rowId);
 
         if ($itemInfo == null) {
             $errorMessage = 'Item not found.';
@@ -137,7 +147,7 @@ class CartController extends Controller
             ]);
         }
 
-        Cart::remove($request->rowId);
+        $this->cartInstance->remove($request->rowId);
 
         $message = 'Item removed successfully.';
         session()->flash('success', $message);
@@ -151,26 +161,15 @@ class CartController extends Controller
     {
         $discount = 0;
         // kalo cart kosong redirect ke cart page 
-        if (Cart::count() == 0) {
+        if ($this->cartInstance->count() == 0) {
             return redirect()->route('front.cart');
         }
 
-        // kalo user gak login redirect ke login page
-        if (Auth::check() == false) {
-
-            if (!session()->has('url.intended')) {
-                session(['url.intended' => url()->current()]);
-            }
-            return redirect()->route('account.login');
-        }
-
-        $customerAddress = CustomerAddress::where('user_id', Auth::user()->id)->first();
-
-        session()->forget('url.intended');
+        $customerAddress = CustomerAddress::where('user_id', $this->user->id)->first();
 
         $countries = Country::orderBy('name', 'ASC')->get();
 
-        $subTotal = Cart::subtotal(2, '.', '');
+        $subTotal = $this->cartInstance->subtotal(2, '.', '');
 
         // itung diskon
 
@@ -191,7 +190,7 @@ class CartController extends Controller
             $totalQty = 0;
             $totalShippingCharge = 0;
             $grandTotal = 0;
-            foreach (Cart::content() as $item) {
+            foreach ($this->cartInstance->content() as $item) {
                 $totalQty += $item->qty;
             }
 
@@ -237,9 +236,8 @@ class CartController extends Controller
         }
 
         // step - 2 simpen alamat
-        $user = Auth::user();
         CustomerAddress::updateOrCreate(
-            ['user_id' => $user->id],
+            ['user_id' => $this->user->id],
             [
                 'first_name' => $request->first_name,
                 'last_name' => $request->last_name,
@@ -262,7 +260,7 @@ class CartController extends Controller
         $code = null;
         $shipping = 0;
         $discount = 0;
-        $subTotal = Cart::subtotal(2, '.', '');
+        $subTotal = $this->cartInstance->subtotal(2, '.', '');
 
 
         // apply discount here
@@ -282,7 +280,7 @@ class CartController extends Controller
         //itung ongkir
         $shippingInfo = ShippingCharge::where('country_id', $request->country)->first();
         $totalQty = 0;
-        foreach (Cart::content() as $item) {
+        foreach ($this->cartInstance->content() as $item) {
             $totalQty += $item->qty;
         }
 
@@ -321,7 +319,7 @@ class CartController extends Controller
         $order->first_name = $request->first_name;
         $order->last_name = $request->last_name;
         $order->email = $request->email;
-        $order->user_id = $user->id;
+        $order->user_id = $this->user->id;
         $order->mobile = $request->mobile;
         $order->country_id = $request->country;
         $order->address = $request->address;
@@ -334,7 +332,7 @@ class CartController extends Controller
 
         //step -4 store order items
 
-        foreach (Cart::content() as $item) {
+        foreach ($this->cartInstance->content() as $item) {
 
             $orderItem = new OrderItem;
             $orderItem->product_id = $item->id;
@@ -363,7 +361,7 @@ class CartController extends Controller
 
         session()->flash('success', 'Ordered Successfully.');
 
-        Cart::destroy();
+        $this->cartInstance->destroy();
 
         session()->forget('code');
 
@@ -379,19 +377,9 @@ class CartController extends Controller
         // }
     }
 
-    public function thankYou($id)
-    {
-        $order = Order::where('id', $id)->first();
-
-        return view('front.thanks', [
-            'id' => $id,
-            'orderNo' => $order->order_no,
-        ]);
-    }
-
     public function getOrderSummary(Request $request)
     {
-        $subTotal = Cart::subtotal(2, '.', '');
+        $subTotal = $this->cartInstance->subtotal(2, '.', '');
         $discount = 0;
         $discountString = '';
 
@@ -416,7 +404,7 @@ class CartController extends Controller
             $shippingInfo = ShippingCharge::where('country_id', $request->country_id)->first();
 
             $totalQty = 0;
-            foreach (Cart::content() as $item) {
+            foreach ($this->cartInstance->content() as $item) {
                 $totalQty += $item->qty;
             }
 
@@ -522,7 +510,7 @@ class CartController extends Controller
             }
         }
 
-        $subTotal = Cart::subtotal(2, '.', '');
+        $subTotal = $this->cartInstance->subtotal(2, '.', '');
         // cek kondisi minimal belanja
         if ($code->min_amount > 0) {
             if ($subTotal < $code->min_amount) {
@@ -544,5 +532,15 @@ class CartController extends Controller
 
         return $this->getOrderSummary($request);
 
+    }
+
+    public function thankYou($id)
+    {
+        $order = Order::where('id', $id)->first();
+
+        return view('front.thanks', [
+            'id' => $id,
+            'orderNo' => $order->order_no,
+        ]);
     }
 }

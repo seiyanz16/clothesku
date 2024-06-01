@@ -1,19 +1,19 @@
 <?php
 
 use App\Http\Controllers\Admin\AdminLoginController;
-use App\Http\Controllers\admin\BrandController;
-use App\Http\Controllers\admin\CategoryController;
-use App\Http\Controllers\admin\SubCategoryController;
-use App\Http\Controllers\admin\DiscountCodeController;
-use App\Http\Controllers\admin\HomeController;
-use App\Http\Controllers\admin\OrderController;
+use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\SubCategoryController;
+use App\Http\Controllers\Admin\DiscountCodeController;
+use App\Http\Controllers\Admin\HomeController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PageController;
-use App\Http\Controllers\admin\TempImageController;
-use App\Http\Controllers\admin\ProductController;
-use App\Http\Controllers\admin\ProductImageController;
-use App\Http\Controllers\admin\ProductSubCategoryController;
-use App\Http\Controllers\admin\SettingController;
-use App\Http\Controllers\admin\ShippingController;
+use App\Http\Controllers\Admin\TempImageController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Admin\ProductSubCategoryController;
+use App\Http\Controllers\Admin\SettingController;
+use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\FrontController;
@@ -34,10 +34,6 @@ use Illuminate\Support\Str;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 // Route::get('/test', function () {
 //     orderEmail(13);
 // });
@@ -45,14 +41,7 @@ use Illuminate\Support\Str;
 Route::get('/', [FrontController::class, 'index'])->name('front.home');
 Route::get('/shop/{categorySlug?}/{subCategorySlug?}', [ShopController::class, 'index'])->name('front.shop');
 Route::get('/product/{slug}', [ShopController::class, 'product'])->name('front.product');
-Route::get('/cart', [CartController::class, 'cart'])->name('front.cart');
 Route::post('/add-to-cart', [CartController::class, 'addToCart'])->name('front.addToCart');
-Route::post('/update-cart', [CartController::class, 'updateCart'])->name('front.updateCart');
-Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.deleteItem');
-Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
-Route::post('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
-Route::get('/thanks/{orderId}', [CartController::class, 'thankYou'])->name('front.thankYou');
-Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
 Route::get('/page/{slug}', [FrontController::class, 'page'])->name('front.page');
 
 // apply discount
@@ -89,6 +78,16 @@ Route::group(['prefix' => 'account'], function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
     });
 
+});
+
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/cart', [CartController::class, 'cart'])->name('front.cart');
+    Route::post('/update-cart', [CartController::class, 'updateCart'])->name('front.updateCart');
+    Route::post('/delete-item', [CartController::class, 'deleteItem'])->name('front.deleteItem');
+    Route::get('/checkout', [CartController::class, 'checkout'])->name('front.checkout');
+    Route::post('/process-checkout', [CartController::class, 'processCheckout'])->name('front.processCheckout');
+    Route::get('/thanks/{orderId}', [CartController::class, 'thankYou'])->name('front.thankYou');
+    Route::post('/get-order-summary', [CartController::class, 'getOrderSummary'])->name('front.getOrderSummary');
 });
 
 Route::group(['prefix' => 'admin'], function () {

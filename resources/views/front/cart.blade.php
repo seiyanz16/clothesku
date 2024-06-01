@@ -32,6 +32,12 @@
                         </div>
                     </div>
                 @endif
+                {{-- @if (session()->has('cart_' . Auth::id()))
+                    <div>
+                        <h3>Cart Content:</h3>
+                        <pre>{{ print_r(session()->get('cart_' . Auth::id()), true) }}</pre>
+                    </div>
+                @endif --}}
                 @if (Cart::count() > 0)
                     <div class="col-md-8">
                         <div class="table-responsive">
@@ -58,7 +64,8 @@
                                                     @endif
                                                     <div class="text-start">
                                                         <h2>{{ $item->name }}</h2>
-                                                        <h2 class="small text-muted">Size: {{$item->options->size}}, Color: {{$item->options->color}}</h2>
+                                                        <h2 class="small text-muted">Size: {{ $item->options->size }},
+                                                            Color: {{ $item->options->color }}</h2>
                                                     </div>
                                                 </div>
                                             </td>
@@ -103,9 +110,9 @@
                                 </div>
                                 <div class="d-flex justify-content-between pb-2">
                                     <div>Subtotal</div>
-                                    <div>${{ Cart::subtotal() }}</div>
+                                    <div>${{ $cartSubtotal }}</div>
                                 </div>
-                                
+
                                 <div class="pt-2">
                                     <a href="{{ route('front.checkout') }}" class="btn-dark btn btn-block w-100">Proceed to
                                         Checkout</a>
@@ -118,7 +125,7 @@
                         <div class="card cart-else">
                             <div class="card-body" align="center">
                                 <h4 class="mt-5">Your Cart is empty!</h4>
-                                <h5><a class="link text-primary" href="{{route('front.shop')}}"> Shop now!</a></h5>
+                                <h5><a class="link text-primary" href="{{ route('front.shop') }}"> Shop now!</a></h5>
                             </div>
                         </div>
                     </div>

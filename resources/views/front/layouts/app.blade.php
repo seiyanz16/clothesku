@@ -47,7 +47,7 @@
         rel="stylesheet">
 
     <!-- Fav Icon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.png')}}" />
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('logo.png') }}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -106,17 +106,27 @@
                     <a href="{{ route('account.wishlist') }}" class="ml-3 d-flex">
                         <i class="far fa-heart text-dark"></i>
                     </a>
-                    <a href="{{ route('front.cart') }}" class="ml-3 d-flex">
+                    <a href="{{ route('front.cart') }}" class="ml-3 d-flex cart-icon">
                         <i class="fas fa-shopping-cart text-dark"></i>
+                        @if (Auth::check())
+                        @php
+                            $user = Auth::user();
+                        @endphp
+                            <span class="cart-item-count">{{ Cart::instance('cart_' . $user->id)->count() }}</span>
+                        @endif
                     </a>
                     <div class="dropdown ml-3">
                         <button class="btn btn-dark dropdown-toggle" type="button" id="dropdownMenuButton"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user text-dark"></i>
+                            <i class="fas fa-user text-dark me-2"></i>
+                            @if (Auth::check())
+                                <span class="text-dark">{{ explode(' ', Auth::user()->name)[0] }}</span>
+                            @endif
                         </button>
                         <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton">
                             @if (Auth::check())
-                                <li><a class="dropdown-item" href="{{ route('account.profile') }}">My Account</a>
+                                <li>
+                                    <a class="dropdown-item" href="{{ route('account.profile') }}">My Account</a>
                                 </li>
                                 <li>
                                     <hr class="dropdown-divider">

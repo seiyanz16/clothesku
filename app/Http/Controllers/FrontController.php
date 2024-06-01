@@ -57,11 +57,8 @@ class FrontController extends Controller
             ]
         );
 
-        // $wishlist = new Wishlist;
-        // $wishlist->user_id = Auth::user()->id;
-        // $wishlist->product_id = $request->id;
-        // $wishlist->save();
-        
+        session()->forget('url.intended');
+
         return response()->json([
             'status' => true,
             'message' => '<div class="alert alert-success"><strong>'. $product->title .'</strong> added in your wishlist.</div>'

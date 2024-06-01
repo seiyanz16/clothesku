@@ -1,4 +1,4 @@
-@section('title', $product->title. ' |')
+@section('title', $product->title . ' |')
 @extends('front.layouts.app')
 @section('content')
     <section class="section-5 pt-3 pb-3 mb-3 bg-white">
@@ -110,24 +110,31 @@
                         </div>
                         {{-- variant option end --}}
                         <div class="d-flex gap-3 align-items-center" style="letter-spacing: 1px">
-                            @if ($product->track_qty == 'yes')
-                                @if ($product->qty > 0)
+                            @if (Auth::check())
+                                @if ($product->track_qty == 'yes')
+                                    @if ($product->qty > 0)
+                                        <a class="btn btn-dark" href="javascript:void(0);"
+                                            onclick="addToCart({{ $product->id }})">
+                                            <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
+                                        </a>
+                                    @else
+                                        <a class="btn btn-dark" href="javascript:void(0);">
+                                            Out of Stock
+                                        </a>
+                                    @endif
+                                @else
                                     <a class="btn btn-dark" href="javascript:void(0);"
                                         onclick="addToCart({{ $product->id }})">
                                         <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
                                     </a>
-                                @else
-                                    <a class="btn btn-dark" href="javascript:void(0);">
-                                        Out of Stock
-                                    </a>
                                 @endif
                             @else
-                                <a class="btn btn-dark" href="javascript:void(0);" onclick="addToCart({{ $product->id }})">
+                                <a class="btn btn-dark" href="{{ route('account.login') }}">
                                     <i class="fa fa-shopping-cart"></i> &nbsp;ADD TO CART
                                 </a>
                             @endif
-                            <a class="btn link" href="javascript:void(0);" onclick="addWishtlist({{ $product->id }})" class="whishlist"
-                                href="222"><i class="fa fa-heart"></i> ADD TO WISHLIST</a>
+                            <a class="btn link" href="javascript:void(0);" onclick="addWishtlist({{ $product->id }})"
+                                class="whishlist" href="222"><i class="fa fa-heart"></i> ADD TO WISHLIST</a>
                         </div>
                     </div>
                 </div>
@@ -377,7 +384,7 @@
                 data: {
                     id: id,
                     size: size,
-                    color: color
+                    color: color,
                 },
                 dataType: 'json',
                 success: function(response) {
