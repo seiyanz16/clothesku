@@ -29,7 +29,7 @@
                                     <address>
                                         <strong>{{ $order->first_name . ' ' . $order->last_name }}</strong><br>
                                         {{ $order->address }}<br>
-                                        {{ $order->city }}, {{ $order->zip }} {{ $order->countryName }}<br>
+                                        {{ $order->city }}, {{ $order->state }},{{ $order->zip }} {{ $order->countryName }}<br>
                                         Phone: {{ $order->mobile }}<br>
                                         Email: {{ $order->email }}
                                     </address>
@@ -49,13 +49,13 @@
                                     <b>Total:</b> ${{ number_format($order->grand_total, 2) }}<br>
                                     <b>Status:</b>
                                     @if ($order->status == 'pending')
-                                        <span class="text-danger">Pending</span>
+                                        <span class="text-warning">Pending</span>
                                     @elseif($order->status == 'shipped')
                                         <span class="text-info">Shipped</span>
                                     @elseif($order->status == 'delivered')
                                         <span class="text-success">Delivered</span>
                                     @else
-                                        <span class="text-danger">Cancelled</span>
+                                        <span class="text-danger">Canceled</span>
                                     @endif
                                     <br>
 

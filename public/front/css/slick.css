@@ -251,3 +251,8 @@ header.bg-white {
 .checkout__order__products .product-name br {
     display: none;
 }
+
+.btn-full-width {
+    width: 100%;
+    display: block;
+}

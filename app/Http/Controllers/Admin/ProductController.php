@@ -31,8 +31,8 @@ class ProductController extends Controller
     public function create()
     {
         $data = [];
-        $categories = Category::orderBy('name', 'ASC')->get();
-        $brands = Brand::orderBy('name', 'ASC')->get();
+        $categories = Category::orderBy('name', 'ASC')->where('status',1)->get();
+        $brands = Brand::orderBy('name', 'ASC')->where('status', 1)->get();
         $data['categories'] = $categories;
         $data['brands'] = $brands;
         return view('admin.product.create', $data);

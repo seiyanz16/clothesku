@@ -11,7 +11,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
-    public function index(Request $request)
+    public function index(Request $request, $status = null)
     {
         $orders = Order::latest('orders.created_at')->select('orders.*', 'users.name', 'users.email');
         $orders = $orders->leftJoin('users', 'users.id', 'orders.user_id');
@@ -20,6 +20,10 @@ class OrderController extends Controller
             $orders = $orders->where('users.name', 'like', '%' . $request->keyword . '%');
             $orders = $orders->orWhere('users.email', 'like', '%' . $request->keyword . '%');
             $orders = $orders->orWhere('orders.id', 'like', '%' . $request->keyword . '%');
+        }
+
+        if (!empty($status)) {
+            $orders = $orders->where('orders.status', $status);
         }
 
         $orders = $orders->with('items')->paginate(10);

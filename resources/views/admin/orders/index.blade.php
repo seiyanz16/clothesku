@@ -60,7 +60,7 @@
                             @if ($orders->isNotEmpty())
                                 @foreach ($orders as $order)
                                     <tr>
-                                        <td><a href="{{ route('orders.detail', [$order->id]) }}">{{ $order->order_no }}</a>
+                                        <td><a href="{{ route('orders.detail', $order->id) }}">{{ $order->order_no }}</a>
                                         </td>
                                         <td>{{ $order->name }}</td>
                                         <td>{{ $order->email }}</td>
@@ -76,13 +76,13 @@
                                         </td>
                                         <td>
                                             @if ($order->status == 'pending')
-                                                <span class="badge bg-danger">Pending</span>
+                                                <span class="badge bg-warning">Pending</span>
                                             @elseif($order->status == 'shipped')
                                                 <span class="badge bg-info">Shipped</span>
                                             @elseif($order->status == 'delivered')
                                                 <span class="badge bg-success">Delivered</span>
                                             @else
-                                                <span class="badge bg-danger">Cancelled</span>
+                                                <span class="badge bg-danger">Canceled</span>
                                             @endif
 
                                         </td>

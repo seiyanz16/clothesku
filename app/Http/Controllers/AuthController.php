@@ -83,6 +83,13 @@ class AuthController extends Controller
         }
     }
 
+    public function logout()
+    {
+        Auth::logout();
+        return redirect()->route('account.login')
+            ->with('success', 'logged out successfully.');
+    }
+
     public function profile()
     {
         $userId = Auth::user()->id;
@@ -176,12 +183,6 @@ class AuthController extends Controller
             ]);
         }
     }
-    public function logout()
-    {
-        Auth::logout();
-        return redirect()->route('account.login')
-            ->with('success', 'logged out successfully.');
-    }
 
     public function orders()
     {
@@ -191,11 +192,35 @@ class AuthController extends Controller
         $data['orders'] = $orders;
         return view('front.account.order', $data);
     }
+    public function orderUpdate($orderId, $status)
+    {
+        $allowedStatuses = ['pending', 'shipped', 'delivered', 'cancelled'];
+
+        if (!in_array($status, $allowedStatuses)) {
+            return response()->json(['error' => 'Invalid status'], 400);
+        }
+
+        $order = Order::find($orderId);
+        if (!$order) {
+            return response()->json(['error' => 'Order not found'], 404);
+        }
+
+        $order->status = $status;
+        $order->save();
+
+        session()->flash('success', 'Order status updated successfully.');
+
+        return response()->json([
+            'status' => true,
+            'errors' => 'Order status updated successfully.'
+        ]);
+    }
+
 
     public function orderDetail(string $id)
     {
         $user = Auth::user();
-        $order = Order::where('user_id', $user->id)->where('id', $id)->first();
+        $order = Order::select('orders.*', 'countries.name as countryName')->where('orders.user_id', $user->id)->where('orders.id', $id)->leftJoin('countries', 'countries.id', 'orders.country_id')->first();
         $data['order'] = $order;
 
         $orderItems = OrderItem::where('order_id', $id)->get();

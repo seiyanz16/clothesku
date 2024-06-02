@@ -73,6 +73,7 @@ Route::group(['prefix' => 'account'], function () {
                 
         Route::get('/my-orders', [AuthController::class, 'orders'])->name('account.orders');
         Route::get('/my-orders/order-detail/{orderId}', [AuthController::class, 'orderDetail'])->name('account.orderDetail');
+        Route::put('my-orders/update-status/{orderId}/{status}', [AuthController::class, 'orderUpdate'])->name('account.orderUpdate');
         Route::get('/my-wishlist', [AuthController::class, 'wishlist'])->name('account.wishlist');
         Route::get('/remove-product-wishlist', [AuthController::class, 'removeProductWishlist'])->name('account.removeProductWishlist');
         Route::get('/logout', [AuthController::class, 'logout'])->name('account.logout');
@@ -180,8 +181,8 @@ Route::group(['prefix' => 'admin'], function () {
         Route::post('/upload-temp-image', [TempImageController::class, 'create'])->name('temp-images.create');
         
         // orders route
-        Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-        Route::get('/orders/{id}', [OrderController::class, 'detail'])->name('orders.detail');
+        Route::get('/orders/{status?}', [OrderController::class, 'index'])->name('orders.index');
+        Route::get('/orders-detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
         Route::post('/order/change-status/{id}', [OrderController::class, 'changeOrderStatus'])->name('orders.changeOrderStatus');
         Route::post('/order/send-email/{id}', [OrderController::class, 'sendInvoiceEmail'])->name('orders.sendInvoiceEmail');
         
