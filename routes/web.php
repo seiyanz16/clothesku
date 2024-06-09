@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\TempImageController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Admin\ProductSubCategoryController;
+use App\Http\Controllers\Admin\ReportController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\ShippingController;
 use App\Http\Controllers\Admin\UserController;
@@ -70,7 +71,7 @@ Route::group(['prefix' => 'account'], function () {
         Route::post('/update-address', [AuthController::class, 'updateAddress'])->name('account.updateAddress');
         Route::get('/change-password', [AuthController::class, 'showChangePassword'])->name('account.showChangePassword');
         Route::post('/update-password', [AuthController::class, 'changePassword'])->name('account.changePassword');
-                
+
         Route::get('/my-orders', [AuthController::class, 'orders'])->name('account.orders');
         Route::get('/my-orders/order-detail/{orderId}', [AuthController::class, 'orderDetail'])->name('account.orderDetail');
         Route::put('my-orders/update-status/{orderId}/{status}', [AuthController::class, 'orderUpdate'])->name('account.orderUpdate');
@@ -99,6 +100,27 @@ Route::group(['prefix' => 'admin'], function () {
     Route::group(['middleware' => 'admin.auth'], function () {
         Route::get('/dashboard', [HomeController::class, 'index'])->name('admin.dasboard');
         Route::get('/logout', [HomeController::class, 'logout'])->name('admin.logout');
+
+        // report
+        // user chart 
+        Route::get('/report/users-view-charts', [ReportController::class, 'viewUsersChart'])->name('users.charts');
+        Route::get('/report/users-fetch-data', [ReportController::class, 'fetchDataUser'])->name('users.fetch-data');
+
+        // order chart
+        Route::get('/report/orders-view-charts', [ReportController::class, 'viewOrdersChart'])->name('orders.charts');
+        Route::get('/report/orders-fetch-data', [ReportController::class, 'fetchDataOrder'])->name('orders.fetch-data');
+
+        // countries chart
+        Route::get('/report/countries-view-charts', [ReportController::class, 'viewCountriesChart'])->name('countries.charts');
+        Route::get('/report/countries-fetch-data', [ReportController::class, 'fetchDataCountry'])->name('countries.fetch-data');
+
+        // revenue chart
+        Route::get('/report/revenue-view-charts', [ReportController::class, 'viewRevenueChart'])->name('revenue.charts');
+        Route::get('/report/revenue-fetch-data', [ReportController::class, 'fetchDataRevenue'])->name('revenue.fetch-data');
+
+        // products chart
+        Route::get('/report/products-view-charts', [ReportController::class, 'viewProductsChart'])->name('products.charts');
+        Route::get('/report/products-fetch-data', [ReportController::class, 'fetchDataProduct'])->name('products.fetch-data');
 
         // category route
         Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
@@ -132,19 +154,19 @@ Route::group(['prefix' => 'admin'], function () {
         Route::put('/products/{product}/', [ProductController::class, 'update'])->name('products.update');
         Route::delete('/products/{product}/', [ProductController::class, 'destroy'])->name('products.delete');
         Route::get('/get-products', [ProductController::class, 'getProducts'])->name('products.getProducts');
-        
+
         Route::get('/products-subcategories', [ProductSubCategoryController::class, 'index'])->name('products-subcategories.index');
-        
+
         Route::post('/product-images/update', [ProductImageController::class, 'update'])->name('product-images.update');
         Route::delete('/product-images', [ProductImageController::class, 'destroy'])->name('product-images.delete');
-        
+
         // shipping 
         Route::get('/shipping/create', [ShippingController::class, 'create'])->name('shipping.create');
         Route::post('/shipping', [ShippingController::class, 'store'])->name('shipping.store');
         Route::get('/shipping/{id}/edit', [ShippingController::class, 'edit'])->name('shipping.edit');
         Route::put('/shipping/{id}', [ShippingController::class, 'update'])->name('shipping.update');
         Route::delete('/shipping/{id}', [ShippingController::class, 'destroy'])->name('shipping.destroy');
-        
+
         // discount code 
         Route::get('/coupons', [DiscountCodeController::class, 'index'])->name('coupons.index');
         Route::get('/coupons/create', [DiscountCodeController::class, 'create'])->name('coupons.create');
@@ -152,7 +174,7 @@ Route::group(['prefix' => 'admin'], function () {
         Route::get('/coupons/{id}/edit', [DiscountCodeController::class, 'edit'])->name('coupons.edit');
         Route::put('/coupons/{id}', [DiscountCodeController::class, 'update'])->name('coupons.update');
         Route::delete('/coupons/{id}', [DiscountCodeController::class, 'destroy'])->name('coupons.destroy');
-        
+
         // user
         Route::get('/users', [UserController::class, 'index'])->name('users.index');
         Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
@@ -179,19 +201,19 @@ Route::group(['prefix' => 'admin'], function () {
 
         // temp-images.create
         Route::post('/upload-temp-image', [TempImageController::class, 'create'])->name('temp-images.create');
-        
+
         // orders route
         Route::get('/orders/{status?}', [OrderController::class, 'index'])->name('orders.index');
         Route::get('/orders-detail/{id}', [OrderController::class, 'detail'])->name('orders.detail');
         Route::post('/order/change-status/{id}', [OrderController::class, 'changeOrderStatus'])->name('orders.changeOrderStatus');
         Route::post('/order/send-email/{id}', [OrderController::class, 'sendInvoiceEmail'])->name('orders.sendInvoiceEmail');
-        
+
         //export excel
         Route::post('/orders/export-excel', [OrderController::class, 'exportExcel'])->name('orders.exportExcel');
 
         Route::get('/getSlug', function (Request $request) {
             $slug = '';
-            if (!empty ($request->title)) {
+            if (!empty($request->title)) {
                 $slug = Str::slug($request->title);
             }
             return response()->json([
@@ -202,7 +224,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/getSKU', function (Request $request) {
             $sku = '';
-            if (!empty ($request->title)) {
+            if (!empty($request->title)) {
                 $sku = strtoupper(Str::random(3));
             }
             return response()->json([
@@ -213,7 +235,7 @@ Route::group(['prefix' => 'admin'], function () {
 
         Route::get('/getBarcode', function (Request $request) {
             $barcode = '';
-            if (!empty ($request->title)) {
+            if (!empty($request->title)) {
                 $barcode = mt_rand(100, 999);
             }
             return response()->json([

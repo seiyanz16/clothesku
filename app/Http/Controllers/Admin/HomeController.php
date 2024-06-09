@@ -7,7 +7,6 @@ use App\Models\Order;
 use App\Models\Product;
 use App\Models\TempImage;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
@@ -60,7 +59,7 @@ class HomeController extends Controller
 
             TempImage::where('id', $tempImage->id)->delete();
         }
-
+        ;
         return view('admin.dashboard',[
             'totalOrders' => $totalOrders,
             'totalProducts' => $totalProducts,

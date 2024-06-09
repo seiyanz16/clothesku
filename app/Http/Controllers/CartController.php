@@ -159,6 +159,7 @@ class CartController extends Controller
 
     public function checkout()
     {
+        $cartItems = $this->cartInstance->content();
         $discount = 0;
         // kalo cart kosong redirect ke cart page 
         if ($this->cartInstance->count() == 0) {
@@ -205,6 +206,7 @@ class CartController extends Controller
         return view('front.checkout', [
             'countries' => $countries,
             'customerAddress' => $customerAddress,
+            'cartItems' => $cartItems,
             'totalShippingCharge' => $totalShippingCharge,
             'discount' => $discount,
             'grandTotal' => $grandTotal

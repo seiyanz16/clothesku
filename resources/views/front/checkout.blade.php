@@ -26,7 +26,7 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="mb-3">
-                                            <p>Fist Name<span class="text-danger">*</span></p>
+                                            <p>First Name<span class="text-danger">*</span></p>
 
                                             <input type="text" name="first_name" id="first_name" class="form-control"
                                                 placeholder="First Name"
@@ -154,7 +154,7 @@
                                         <th>Qty</th>
                                         <th>Total</th>
                                     </tr>
-                                    @foreach (Cart::content() as $item)
+                                    @foreach ($cartItems as $item)
                                         <tr class="checkout__total__products">
                                             <td>
                                                 <span class="product-name">
@@ -170,7 +170,7 @@
 
                                 <div class="d-flex justify-content-between summery-end">
                                     <div class="h6"><strong>Subtotal</strong></div>
-                                    <div class="h6"><strong>${{ Cart::subtotal() }}</strong></div>
+                                    <div class="h6"><strong>${{ Cart::instance('cart_' . Auth::user()->id)->subtotal() }}</strong></div>
                                 </div>
                                 <div class="d-flex justify-content-between summery-end">
                                     <div class="h6"><strong>Discount</strong></div>

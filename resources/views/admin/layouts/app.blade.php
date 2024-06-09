@@ -10,7 +10,9 @@
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{ asset('admin/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
     <link rel="stylesheet" href="{{ asset('admin/css/adminlte.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/custom.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/js/cute-alert/style.css') }}">
@@ -18,6 +20,7 @@
     <link rel="stylesheet" href="{{ asset('admin/plugins/summernote/summernote-bs4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/plugins/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('admin/css/datetimepicker.css') }}">
+    <link rel="stylesheet" href="{{ asset('admin/plugins/daterangepicker/daterangepicker.css') }}">
     <link rel="shortcut icon" type="image/x-icon" href="{{asset('logo.png')}}" />
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
@@ -99,7 +102,9 @@
     <script src="{{ asset('admin/plugins/summernote/summernote-bs4.min.js') }}"></script>
     <script src="{{ asset('admin/plugins/select2/js/select2.min.js') }}"></script>
     <script src="{{ asset('admin/js/datetimepicker.js') }}"></script>
-
+    <script src="{{asset('admin/js/canvasjs.min.js')}}"></script>
+    <script src="{{ asset('admin/plugins/moment/moment.min.js') }}"></script>
+    <script src="{{ asset('admin/plugins/daterangepicker/daterangepicker.js') }}"></script>
     @stack('scripts')
     <script>
         $.ajaxSetup({

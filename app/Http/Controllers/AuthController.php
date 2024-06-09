@@ -194,7 +194,7 @@ class AuthController extends Controller
     }
     public function orderUpdate($orderId, $status)
     {
-        $allowedStatuses = ['pending', 'shipped', 'delivered', 'cancelled'];
+        $allowedStatuses = ['delivered', 'cancelled'];
 
         if (!in_array($status, $allowedStatuses)) {
             return response()->json(['error' => 'Invalid status'], 400);

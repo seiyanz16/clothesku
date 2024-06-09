@@ -177,9 +177,6 @@
             $('#shipped_date').datetimepicker({
                 format: 'Y-m-d H:i:s',
             });
-            $('#end').datetimepicker({
-                format: 'Y-m-d H:i:s',
-            });
         });
 
         $('#changeStatus').submit(function(event) {

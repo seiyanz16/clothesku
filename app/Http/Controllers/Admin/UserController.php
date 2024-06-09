@@ -12,7 +12,8 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        $users = User::where('role', '!=', 1);;
+        $users = User::where('role', '!=', 1);
+        ;
         if (!empty($request->get('keyword'))) {
             $users = $users->where('name', 'like', '%' . $request->get('keyword') . '%')
                 ->orWhere('email', 'like', '%' . $request->get('keyword') . '%')
@@ -20,7 +21,7 @@ class UserController extends Controller
         }
         $users = $users->latest()->paginate(10);
 
-        return view('admin.user.index',compact('users'));
+        return view('admin.user.index', compact('users'));
     }
 
     public function create()
@@ -70,7 +71,7 @@ class UserController extends Controller
         return view('admin.user.edit', [
             'user' => $user
         ]);
-        
+
     }
 
     public function update(Request $request, string $id)
@@ -84,7 +85,7 @@ class UserController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|unique:users,email,'.$user->id.',id',
+            'email' => 'required|unique:users,email,' . $user->id . ',id',
         ]);
 
         if ($validator->passes()) {

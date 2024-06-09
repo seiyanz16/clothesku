@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Exports\OrdersExcelExport;
+// use App\Exports\OrdersExcelExport;
 use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
+
+// use Maatwebsite\Excel\Facades\Excel;
 
 class OrderController extends Controller
 {
@@ -84,4 +85,5 @@ class OrderController extends Controller
     // {
     //     return Excel::download(new OrdersExcelExport, 'OrdersData.xlsx');
     // }
+
 }
