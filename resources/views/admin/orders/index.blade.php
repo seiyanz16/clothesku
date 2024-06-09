@@ -23,7 +23,7 @@
                 <form action="" method="get">
                     <div class="card-header">
                         <div class="card-title">
-                            <a href="" class="btn btn-success">Export Excel</a>
+                            <a href="" class="btn btn-info export-pdf">Export PDF</a>
                         </div>
                         <div class="card-tools d-flex">
                             <div class="input-group input-group" style="width: 250px;">
@@ -67,12 +67,13 @@
                                         <td>{{ $order->mobile }}</td>
                                         <td>{{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }}</td>
                                         <td>
-                                            <ull>
-                                            @foreach ($order->items as $item)
-                                               <li>{{ $item->name . ' (' . $item->size . ', ' . $item->color . ') ' }} x
-                                                {{ $item->qty }}</li> 
-                                            @endforeach
-                                            </ull>
+                                            <ul>
+                                                @foreach ($order->items as $item)
+                                                    <li>{{ $item->name . ' (' . $item->size . ', ' . $item->color . ') ' }}
+                                                        x
+                                                        {{ $item->qty }}</li>
+                                                @endforeach
+                                            </ul>
                                         </td>
                                         <td>
                                             @if ($order->status == 'pending')
@@ -108,5 +109,59 @@
     <!-- /.content -->
 @endsection
 @push('scripts')
-    <script></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.3.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.13/jspdf.plugin.autotable.min.js"></script>
+
+    <script>
+        document.querySelector('.export-pdf').addEventListener('click', function(event) {
+            event.preventDefault();
+
+            const {
+                jsPDF
+            } = window.jspdf;
+            const doc = new jsPDF('landscape');
+
+            doc.text("Orders", 14, 22);
+
+            doc.autoTable({
+                startY: 30,
+                head: [
+                    ['Orders No', 'Customer', 'Email', 'Phone', 'Payment Method', 'Product x Qty',
+                        'Status', 'Total', 'Date Ordered'
+                    ]
+                ],
+                body: [
+                    @foreach ($orders as $order)
+                        [
+                            "{{ $order->order_no }}",
+                            "{{ $order->name }}",
+                            "{{ $order->email }}",
+                            "{{ $order->mobile }}",
+                            "{{ $order->payment_method == 'transfer' ? 'KuPay Transfer' : 'COD' }}",
+                            "{!! implode(
+                                '<br>',
+                                $order->items->map(fn($item) => $item->name . ' (' . $item->size . ', ' . $item->color . ') x ' . $item->qty)->toArray(),
+                            ) !!}",
+                            @if ($order->status == 'pending')
+                                "Pending"
+                            @elseif ($order->status == 'shipped')
+                                "Shipped"
+                            @elseif ($order->status == 'delivered')
+                                "Delivered"
+                            @else
+                                "Canceled"
+                            @endif ,
+                            "${{ number_format($order->grand_total, 2) }}",
+                            "{{ \Carbon\Carbon::parse($order->created_at)->format('d M, Y') }}"
+                        ],
+                    @endforeach
+                ],
+                styles: {
+                    overflow: 'linebreak'
+                }
+            });
+
+            doc.save('orders.pdf');
+        });
+    </script>
 @endpush
