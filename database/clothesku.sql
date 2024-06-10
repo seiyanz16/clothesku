@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 29, 2024 at 03:33 AM
+-- Generation Time: Jun 09, 2024 at 03:13 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -195,7 +195,6 @@ INSERT INTO `countries` (`id`, `name`, `code`, `created_at`, `updated_at`) VALUE
 (102, 'Iran (Islamic Republic of)', 'IR', NULL, NULL),
 (103, 'Iraq', 'IQ', NULL, NULL),
 (104, 'Ireland', 'IE', NULL, NULL),
-(105, 'Israel', 'IL', NULL, NULL),
 (106, 'Italy', 'IT', NULL, NULL),
 (107, 'Ivory Coast', 'CI', NULL, NULL),
 (108, 'Jamaica', 'JM', NULL, NULL),
@@ -205,7 +204,7 @@ INSERT INTO `countries` (`id`, `name`, `code`, `created_at`, `updated_at`) VALUE
 (112, 'Kenya', 'KE', NULL, NULL),
 (113, 'Kiribati', 'KI', NULL, NULL),
 (114, 'Korea, Democratic People\'s Republic of', 'KP', NULL, NULL),
-(115, 'Korea, Republic of', 'KR', NULL, NULL),
+(115, 'South Korea', 'KR', NULL, NULL),
 (116, 'Kuwait', 'KW', NULL, NULL),
 (117, 'Kyrgyzstan', 'KG', NULL, NULL),
 (118, 'Lao People\'s Democratic Republic', 'LA', NULL, NULL),
@@ -255,7 +254,7 @@ INSERT INTO `countries` (`id`, `name`, `code`, `created_at`, `updated_at`) VALUE
 (162, 'Norway', 'NO', NULL, NULL),
 (163, 'Oman', 'OM', NULL, NULL),
 (164, 'Pakistan', 'PK', NULL, NULL),
-(165, 'Palau', 'PW', NULL, NULL),
+(165, 'Palestine', 'PN', NULL, NULL),
 (166, 'Panama', 'PA', NULL, NULL),
 (167, 'Papua New Guinea', 'PG', NULL, NULL),
 (168, 'Paraguay', 'PY', NULL, NULL),
@@ -363,10 +362,21 @@ CREATE TABLE `customer_addresses` (
 
 INSERT INTO `customer_addresses` (`id`, `user_id`, `first_name`, `last_name`, `email`, `mobile`, `country_id`, `address`, `apartement`, `city`, `state`, `zip`, `created_at`, `updated_at`) VALUES
 (1, 4, 'Vernon', 'Chwe', 'bonon@gmail.com', '32131234921', 101, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', '2024-04-06 18:05:21', '2024-04-13 00:29:50'),
-(2, 3, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', '2024-04-07 21:37:10', '2024-04-13 10:18:40'),
+(2, 3, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Kp. Citayam RT.05/RW.19 No. 182', 'No. 123', 'Bogor', 'Jawa Barat', '16921', '2024-04-07 21:37:10', '2024-06-02 02:43:11'),
 (3, 5, 'Joshua', 'Hong', 'josh@gmail.com', '088888888888', 1, '123 Street', 'Wilco Apartement, No. 115', 'Los Angles', 'California', '12345', '2024-04-12 10:31:56', '2024-04-17 16:07:01'),
 (4, 1, 'Zaskia', 'Fitri Sholehah', 'zaskia@gmail.com', '089639207274', 101, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 111', 'Bogor', 'Jawa Barat', '16921', '2024-04-14 00:22:45', '2024-04-14 00:22:45'),
-(5, 6, 'Minghao', 'Xu', 'haosaranghao@gmail.com', '021393192102', 101, 'Jl. Rawa Panjang', 'No. 15', 'Bogor', 'Jawa Barat', '16921', '2024-04-15 13:38:41', '2024-04-17 15:47:58');
+(5, 6, 'Minghao', 'Xu', 'haosaranghao@gmail.com', '021393192102', 101, 'Jl. Rawa Panjang', 'No. 15', 'Bogor', 'Jawa Barat', '16921', '2024-04-15 13:38:41', '2024-04-17 15:47:58'),
+(6, 12, 'Jihoon', 'Lee', 'woozi@gmail.com', '01232191231', 115, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', '2024-06-03 07:13:15', '2024-06-03 07:13:15'),
+(7, 9, 'Jeonghan', 'Yoon', 'jeonghan@gmail.com', '1234556612', 115, 'Block 123, Gangnam, Seoul', NULL, 'Gangnam', 'Seoul', '23421', '2024-06-08 06:14:43', '2024-06-08 06:14:43'),
+(8, 17, 'Kohaku', 'Oukawa', 'oukohaku@gmail.com', '2312123121', 109, 'Abbey Road No. 57', 'Wilco Apartement, No. 115', 'Nogizaka', 'Nagasaki', '16921', '2024-06-08 06:24:25', '2024-06-08 06:24:25'),
+(9, 8, 'Seungcheol', 'Choi', 'scoups@gmail.com', '01232191231', 115, 'Oppa Gangnam Style, Lalali Street 17', 'No. 234', 'Incheon', 'Incheon', '21323', '2024-06-08 10:42:52', '2024-06-08 10:42:52'),
+(10, 10, 'Junhui', 'Wein', 'jun@gmail.com', '1232142124', 45, 'Nihaoma, Ni ai Wo St. 201', 'Mixue Apartement, No. 115', 'Shanghai', 'Shanghai', '21212', '2024-06-08 10:45:49', '2024-06-08 10:45:49'),
+(11, 11, 'Wonwoo', 'Jeon', 'wonwoo@gmail.com', '02131249111', 115, 'GAM3 BO1, Monster St. 21', 'IF I Apart, Unit 821', 'Uichang-gu', 'Changwon-si', '212312', '2024-06-08 10:49:05', '2024-06-08 10:49:05'),
+(12, 7, 'Soonyoung', 'Kwon', 'hoshi@gmail.com', '092141212211', 115, 'Horangi Power, Spider Street', 'Tiger Apartement, Unit 213', 'Namyangju-si', 'Gyeonggi', '21232', '2024-06-08 11:16:02', '2024-06-08 11:16:02'),
+(13, 13, 'Mingyu', 'Kim', 'mingyu@gmail.com', '065131121294', 115, 'Migoo, Fire Street 27', 'Trauma Apartement, Unit 202', 'Dongan-gu', 'Anyang-si', '31343', '2024-06-08 11:31:09', '2024-06-08 11:31:09'),
+(14, 14, 'Seokmin', 'Lee', 'dokyeom@gmail.com', '093213123213', 101, 'Kp. Missed Connection, RT. 21 RW. 12', NULL, 'Pancoran', 'Surabaya', '31922', '2024-06-08 11:33:53', '2024-06-08 11:33:53'),
+(15, 15, 'Seungkwan', 'Boo', 'seungkwan@gmail.com', '087512321229', 101, 'Dandelion Village, Blok. 2 No. 121', NULL, 'Cipayung', 'Depok', '24012', '2024-06-08 11:35:49', '2024-06-08 11:35:49'),
+(16, 16, 'Chan', 'Lee', 'dino@gmail.com', '084122321333', 109, 'Don\'t tell me wait, Dino Street', 'Kosan Pi Cheolin No. 1', 'Yokohama', 'Yokohama', '57132', '2024-06-08 11:38:07', '2024-06-08 11:38:07');
 
 -- --------------------------------------------------------
 
@@ -398,7 +408,7 @@ INSERT INTO `discount_coupons` (`id`, `code`, `name`, `max_uses`, `max_user`, `t
 (2, 'EID2024', 'Eid Mubarak', 10, NULL, 'fixed', 10.00, 500.00, 1, '2024-04-09 08:00:27', '2024-04-30 07:27:35', '2024-04-08 17:27:41', '2024-04-17 15:50:31'),
 (3, 'BACK2SCHOOL', 'Back to School Coupon', 2, NULL, 'percent', 10.00, 800.00, 1, '2024-04-09 08:00:11', '2024-04-27 08:13:20', '2024-04-08 18:13:24', '2024-04-12 02:59:17'),
 (4, 'NEWMEMBER', 'New Member Coupon', 1, 1, 'fixed', 100.00, NULL, 1, '2024-04-15 13:39:55', '2024-04-30 13:37:57', '2024-04-15 06:38:38', '2024-04-15 06:38:38'),
-(5, 'COBA', 'Coupon Coba', 5, NULL, 'fixed', 50.00, 150.00, 1, '2024-04-18 07:00:34', '2024-07-31 06:36:39', '2024-04-17 23:36:50', '2024-04-17 23:36:50');
+(5, 'COBA', 'Coupon Coba', 5, NULL, 'fixed', 50.00, 150.00, 1, '2024-04-18 07:00:34', '2024-07-18 06:36:39', '2024-04-17 23:36:50', '2024-06-02 03:06:11');
 
 -- --------------------------------------------------------
 
@@ -503,10 +513,19 @@ INSERT INTO `orders` (`id`, `order_no`, `user_id`, `subtotal`, `shipping`, `coup
 (55, '#ORD-00007', 5, 300.00, 30.00, NULL, NULL, 0.00, 330.00, 'transfer', 56789345, 'paid', 'pending', NULL, 'Joshua', 'Hong', 'josh@gmail.com', '088888888888', 1, '123 Street', 'Wilco Apartement, No. 115', 'Los Angles', 'California', '12345', NULL, '2024-04-17 22:52:28', '2024-04-17 22:52:28'),
 (57, '#ORD-00008', 6, 150.00, 20.00, NULL, NULL, 0.00, 170.00, 'cod', NULL, 'paid', 'delivered', '2024-04-18 06:28:00', 'Minghao', 'Xu', 'haosaranghao@gmail.com', '021393192102', 101, 'Jl. Rawa Panjang', 'No. 15', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-17 23:24:27', '2024-04-17 23:28:12'),
 (58, '#ORD-00009', 6, 150.00, 20.00, NULL, NULL, 0.00, 170.00, 'cod', NULL, 'paid', 'delivered', '2024-04-19 06:45:08', 'Minghao', 'Xu', 'haosaranghao@gmail.com', '021393192102', 101, 'Jl. Rawa Panjang', 'No. 15', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-17 23:44:08', '2024-04-17 23:45:43'),
-(59, '#ORD-00010', 3, 300.00, 20.00, 'COBA', 5, 50.00, 270.00, 'transfer', 12345678, 'paid', 'pending', NULL, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 00:49:58', '2024-04-19 00:49:58'),
-(60, '#ORD-00011', 3, 670.00, 20.00, 'COBA', 5, 50.00, 640.00, 'cod', NULL, 'not_paid', 'pending', NULL, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 01:46:34', '2024-04-19 01:46:34'),
-(61, '#ORD-00012', 4, 200.00, 20.00, 'COBA', 5, 50.00, 170.00, 'transfer', 12345678, 'paid', 'pending', NULL, 'Vernon', 'Chwe', 'bonon@gmail.com', '32131234921', 101, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 22:48:31', '2024-04-19 22:48:31'),
-(62, '#ORD-00013', 4, 300.00, 20.00, NULL, NULL, 0.00, 320.00, 'cod', NULL, 'not_paid', 'pending', NULL, 'Vernon', 'Chwe', 'bonon@gmail.com', '32131234921', 101, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-20 09:59:40', '2024-04-20 09:59:40');
+(59, '#ORD-00010', 3, 300.00, 20.00, 'COBA', 5, 50.00, 270.00, 'transfer', 12345678, 'not_paid', 'cancelled', NULL, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 00:49:58', '2024-06-03 05:11:59'),
+(60, '#ORD-00011', 3, 670.00, 20.00, 'COBA', 5, 50.00, 640.00, 'cod', NULL, 'not_paid', 'cancelled', NULL, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 01:46:34', '2024-06-02 12:55:31'),
+(61, '#ORD-00012', 4, 200.00, 20.00, 'COBA', 5, 50.00, 170.00, 'transfer', 12345678, 'paid', 'shipped', '2024-06-07 11:42:36', 'Vernon', 'Chwe', 'bonon@gmail.com', '32131234921', 101, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-04-19 22:48:31', '2024-06-07 04:42:50'),
+(70, '#ORD-00013', 3, 100.00, 20.00, NULL, NULL, 0.00, 120.00, 'transfer', 123456789, 'paid', 'delivered', '2024-06-02 19:53:28', 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-05-01 10:09:47', '2024-06-02 12:54:26'),
+(71, '#ORD-00014', 3, 400.00, 20.00, NULL, NULL, 0.00, 420.00, 'transfer', 12345678, 'paid', 'cancelled', NULL, 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-05-03 23:35:33', '2024-06-02 03:01:58'),
+(72, '#ORD-00015', 6, 430.00, 20.00, NULL, NULL, 0.00, 450.00, 'cod', NULL, 'paid', 'delivered', '2024-06-02 08:34:07', 'Minghao', 'Xu', 'haosaranghao@gmail.com', '021393192102', 101, 'Jl. Rawa Panjang', 'No. 15', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-05-25 16:16:29', '2024-06-02 01:34:16'),
+(73, '#ORD-00016', 5, 120.00, 30.00, NULL, NULL, 0.00, 150.00, 'transfer', 123456789, 'paid', 'cancelled', NULL, 'Joshua', 'Hong', 'josh@gmail.com', '088888888888', 1, '123 Street', 'Wilco Apartement, No. 115', 'Los Angles', 'California', '12345', NULL, '2024-05-27 07:07:20', '2024-06-01 06:25:11'),
+(74, '#ORD-00017', 3, 430.00, 20.00, NULL, NULL, 0.00, 450.00, 'cod', NULL, 'paid', 'delivered', '2024-06-01 13:24:10', 'Muhamad', 'Ali', 'ali@gmail.com', '01232191231', 101, 'Dummy Dummy Dummy Dummy Dummy Dummy Dummy Dummy', 'No. 123', 'Bogor', 'Jawa Barat', '16921', 'Deket Bakso Mancung', '2024-06-01 03:16:28', '2024-06-02 03:00:50'),
+(75, '#ORD-00018', 12, 207.00, 50.00, NULL, NULL, 0.00, 257.00, 'transfer', 12345678, 'paid', 'delivered', NULL, 'Jihoon', 'Lee', 'woozi@gmail.com', '01232191231', 115, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-06-03 07:13:16', '2024-06-03 07:19:46'),
+(76, '#ORD-00019', 12, 207.00, 25.00, 'COBA', 5, 50.00, 182.00, 'cod', NULL, 'paid', 'shipped', '2024-06-08 13:11:56', 'Jihoon', 'Lee', 'woozi@gmail.com', '01232191231', 115, 'Kp. Pos Citayam RT.04 RW.11 No.111', 'No. 123', 'Bogor', 'Jawa Barat', '16921', NULL, '2024-06-07 02:47:36', '2024-06-07 06:12:02'),
+(77, '#ORD-00020', 9, 100.00, 25.00, NULL, NULL, 0.00, 125.00, 'transfer', 122345671, 'paid', 'pending', NULL, 'Jeonghan', 'Yoon', 'jeonghan@gmail.com', '1234556612', 115, 'Block 123, Gangnam, Seoul', NULL, 'Gangnam', 'Seoul', '23421', NULL, '2024-06-08 06:15:39', '2024-06-08 06:15:39'),
+(78, '#ORD-00021', 17, 240.00, 24.00, NULL, NULL, 0.00, 264.00, 'transfer', 212312312, 'paid', 'cancelled', NULL, 'Kohaku', 'Oukawa', 'oukohaku@gmail.com', '2312123121', 109, 'Abbey Road No. 57', 'Wilco Apartement, No. 115', 'Nogizaka', 'Nagasaki', '16921', NULL, '2024-06-08 06:25:13', '2024-06-08 06:38:56'),
+(79, '#ORD-00022', 17, 200.00, 24.00, NULL, NULL, 0.00, 224.00, 'cod', NULL, 'not_paid', 'pending', NULL, 'Kohaku', 'Oukawa', 'oukohaku@gmail.com', '2312123121', 109, 'Abbey Road No. 57', 'Wilco Apartement, No. 115', 'Nogizaka', 'Nagasaki', '16921', NULL, '2024-06-08 06:42:52', '2024-06-08 06:42:52');
 
 -- --------------------------------------------------------
 
@@ -551,7 +570,16 @@ INSERT INTO `order_items` (`id`, `order_id`, `product_id`, `name`, `size`, `colo
 (65, 60, 20, 'JKT48 Bday Shirt Lia', 'L', 'Blue', 2, 120.00, 240.00, '2024-04-19 01:46:35', '2024-04-19 01:46:35'),
 (66, 60, 25, 'Hacheads Shirt Hoodie', 'XL', 'Black', 1, 430.00, 430.00, '2024-04-19 01:46:35', '2024-04-19 01:46:35'),
 (67, 61, 12, 'Baggy Jeans Dokyeom', 'All Size', 'Denim', 1, 200.00, 200.00, '2024-04-19 22:48:31', '2024-04-19 22:48:31'),
-(68, 62, 16, 'Long Coat Winter', 'All Size', 'Blue', 1, 300.00, 300.00, '2024-04-20 09:59:40', '2024-04-20 09:59:40');
+(70, 70, 15, 'Blazer Horanghae', 'M', 'Horanghae', 1, 100.00, 100.00, '2024-05-01 10:09:47', '2024-05-01 10:09:47'),
+(71, 71, 12, 'Baggy Jeans Dokyeom', 'All Size', 'Denim', 2, 200.00, 400.00, '2024-05-03 23:35:33', '2024-05-03 23:35:33'),
+(72, 72, 25, 'Hacheads Shirt Hoodie', 'L', 'Black', 1, 430.00, 430.00, '2024-05-25 16:16:30', '2024-05-25 16:16:30'),
+(73, 73, 27, 'Hoodie Supreme', 'M', 'Gray', 1, 120.00, 120.00, '2024-05-27 07:07:20', '2024-05-27 07:07:20'),
+(74, 74, 25, 'Hacheads Shirt Hoodie', 'L', 'Black', 1, 430.00, 430.00, '2024-06-01 03:16:29', '2024-06-01 03:16:29'),
+(75, 75, 23, 'Rhude Brentwood Jacket', 'XL', 'Gray', 1, 207.00, 207.00, '2024-06-03 07:13:16', '2024-06-03 07:13:16'),
+(76, 76, 23, 'Rhude Brentwood Jacket', 'L', 'Gray', 1, 207.00, 207.00, '2024-06-08 02:47:36', '2024-06-08 02:47:36'),
+(77, 77, 15, 'Blazer Horanghae', 'L', 'Horanghae', 1, 100.00, 100.00, '2024-06-08 06:15:40', '2024-06-08 06:15:40'),
+(78, 78, 26, 'Wool Cardigan Jun', 'XL', 'Gray', 2, 120.00, 240.00, '2024-06-08 06:25:13', '2024-06-08 06:25:13'),
+(79, 79, 15, 'Blazer Horanghae', 'L', 'Horanghae', 2, 100.00, 200.00, '2024-06-08 06:42:52', '2024-06-08 06:42:52');
 
 -- --------------------------------------------------------
 
@@ -646,9 +674,9 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `title`, `slug`, `description`, `size`, `color`, `shipping_returns`, `related_products`, `price`, `compare_price`, `category_id`, `sub_category_id`, `brand_id`, `is_featured`, `sku`, `barcode`, `track_qty`, `qty`, `status`, `created_at`, `updated_at`) VALUES
 (8, 'Kutang Sebong', 'kutang-sebong', '<p>&nbsp;<span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino.</span></p>', 'M, L, XL, XXL', 'Black, White', '<p>lee chan dino&nbsp;<span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino:</span></p><ol><li><span style=\"font-size: 1rem;\">lee chan dino&nbsp;<span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino&nbsp;</span><span style=\"font-size: 1rem;\">lee chan dino</span></span></li><li><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\">lee chan dino&nbsp;<span style=\"font-size: 1rem;\">lee chan</span><br></span><br></span><br></li></ol>', '14,15,19,25', 200.00, 250.00, 26, 6, NULL, 'yes', 'KTM', '123', 'yes', 0, 1, '2024-04-01 04:39:10', '2024-04-17 16:08:07'),
-(12, 'Baggy Jeans Dokyeom', 'baggy-jeans-dokyeom', 'salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute .', 'All Size', 'Denim', '<p>salute gedewiye salute&nbsp;<span style=\"font-size: 1rem;\">salute gedewiye salute :</span></p><ul><li><span style=\"font-size: 1rem;\">salute gedewiye salute&nbsp;</span></li><li><span style=\"font-size: 1rem;\">salute gedewiye salute&nbsp; salute gedewiye salute&nbsp;<br></span><br></li></ul>', '8,27,15,18', 200.00, 205.00, 26, 18, NULL, 'yes', 'FDA', '213', 'yes', 30, 1, '2024-04-01 17:42:19', '2024-04-19 22:48:31'),
+(12, 'Baggy Jeans Dokyeom', 'baggy-jeans-dokyeom', 'salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute salute gedewiye salute .', 'All Size', 'Denim', '<p>salute gedewiye salute&nbsp;<span style=\"font-size: 1rem;\">salute gedewiye salute :</span></p><ul><li><span style=\"font-size: 1rem;\">salute gedewiye salute&nbsp;</span></li><li><span style=\"font-size: 1rem;\">salute gedewiye salute&nbsp; salute gedewiye salute&nbsp;<br></span><br></li></ul>', '8,27,15,18', 200.00, 205.00, 26, 18, NULL, 'yes', 'FDA', '213', 'yes', 28, 1, '2024-04-01 17:42:19', '2024-05-03 23:35:33'),
 (14, 'JKT48 Bday Shirt Fiony 2024', 'jkt48-bday-shirt-fiony-2024', '<p>Bday TSHIRT INI SEBENERNYA AKU PENGEN BANGET YA ALLAH, MAHAL KASIH MURAH.</p>', 'S, M, L, XL, XXL', 'Black', '<p>lorem ipsum sit dolor amet:</p><ol><li>lorem</li><li>ipsum</li><li>sit dolor</li></ol>', '22,17,20,8', 400.00, 450.00, 28, 5, NULL, 'yes', 'PIO', '321', 'yes', 1, 1, '2024-04-02 02:04:53', '2024-04-17 15:58:58'),
-(15, 'Blazer Horanghae', 'blazer-horanghae', '<p>lorem ipsum sit dolor amet hoshi&nbsp;<span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi .</span></p>', 'S, M, L, XL', 'Horanghae', '<div>lorem ipsum sit dolor amet hoshi&nbsp;<span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi :</span><br></div><ol><li>lorem ipsum sit dolor amet hoshi&nbsp; lorem ipsum sit dolor amet hoshi&nbsp;</li><li>lorem ipsum sit&nbsp;</li><li>lorem ipsum sit dolor amet hoshi&nbsp;<br></li></ol>', '8,14,21,26', 100.00, 200.00, 28, 9, NULL, 'yes', 'FAF', '421', 'yes', 30, 1, '2024-04-02 23:37:47', '2024-04-17 04:16:14'),
+(15, 'Blazer Horanghae', 'blazer-horanghae', '<p>lorem ipsum sit dolor amet hoshi&nbsp;<span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi .</span></p>', 'S, M, L, XL', 'Horanghae', '<div>lorem ipsum sit dolor amet hoshi&nbsp;<span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi&nbsp;</span><span style=\"font-size: 1rem;\">lorem ipsum sit dolor amet hoshi :</span><br></div><ol><li>lorem ipsum sit dolor amet hoshi&nbsp; lorem ipsum sit dolor amet hoshi&nbsp;</li><li>lorem ipsum sit&nbsp;</li><li>lorem ipsum sit dolor amet hoshi&nbsp;<br></li></ol>', '8,14,21,26', 100.00, 200.00, 28, 9, NULL, 'yes', 'FAF', '421', 'yes', 26, 1, '2024-04-02 23:37:47', '2024-06-08 06:42:52'),
 (16, 'Long Coat Winter', 'long-coat-winter', '<p>Wonu otaku&nbsp;<span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem.&nbsp;</span><span style=\"font-size: 1rem;\">Wonu otaku&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem.&nbsp;</span></p><p>lorem lorem lorem lorem lorem lorem&nbsp;<span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem.</span></p><ol><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem</span></li><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem&nbsp;</span></li><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem<br></span><span style=\"font-size: 1rem;\"><br></span></li></ol>', 'All Size', 'Blue, Brown', '<p>&nbsp;<span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem&nbsp;</span><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem</span></p><p>lorem lorem lorem lorem lorem lorem&nbsp;<span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem.</span></p><ol><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem</span></li><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem&nbsp;</span></li><li><span style=\"font-size: 1rem;\">lorem lorem lorem lorem lorem lorem<br></span></li></ol>', '19,25,27,12', 300.00, 320.00, 28, 12, NULL, 'yes', 'GSW', '311', 'yes', 0, 1, '2024-04-03 01:06:14', '2024-04-20 09:59:40'),
 (17, 'Polcadot Dress', 'polcadot-dress', '<p>lorem lorem lorem apa yang lorem? cepio lucu banget!</p>', 'All Size', 'Broken White, White', '<p>Syarat Returns jika barang rusak, wajib video unboxing. Ongkir ditanggung JOT.<br></p>', '14,22,20,26', 150.00, 200.00, 25, 13, NULL, 'yes', 'HFS', '232', 'yes', 39, 1, '2024-04-03 01:08:23', '2024-04-17 23:44:09'),
 (18, 'SKZ Baseball Jersey', 'skz-baseball-jersey', '<p>Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet. Lorem ipsum sit dolor amet.</p><p><br></p><p>Jisungie love you~</p>', 'M, L, XL', 'White, Black', '<p>Syarat Returns jika barang rusak, wajib video unboxing. Ongkir ditanggung pemerintah.<br></p>', '8,14,12,19', 100.00, 120.00, 26, 6, NULL, 'yes', 'HJR', '211', 'yes', 18, 1, '2024-04-03 01:10:20', '2024-04-19 00:49:58'),
@@ -656,11 +684,11 @@ INSERT INTO `products` (`id`, `title`, `slug`, `description`, `size`, `color`, `
 (20, 'JKT48 Bday Shirt Lia', 'jkt48-bday-shirt-lia', '<p>Birthday Shirt aseli coy, yang oshiin lia merapat. Pengemasan dan pengiriman terjamin secepat kilat gak kayak inisial JOT.</p>', 'S, M, L, XL, XXL', 'Blue', 'Syarat Returns jika barang rusak, wajib video unboxing. Ongkir ditanggung pemerintah.', '22,17,14,19', 120.00, 200.00, 28, 5, NULL, 'yes', 'PPR', '213', 'yes', 26, 1, '2024-04-03 01:14:33', '2024-04-19 01:46:35'),
 (21, 'Kenzo Vernon One Set', 'kenzo-vernon-one-set', '<p>Trouser and Blazer&nbsp;</p>', 'M, L, XL', 'Black', '<p>&nbsp;returns and shipping<br></p><p>lorem lorem lorem lorem bonon ganteng lorem lorem lorem lorem lorem lorem</p><p>1 x 24 jam wajib lapor.</p>', '8,12,19', 460.00, 600.00, 26, 18, 6, 'yes', 'PAG', '249', 'yes', 16, 1, '2024-04-03 01:17:02', '2024-04-17 05:01:18'),
 (22, 'Dress One Piece', 'dress-one-piece', '<p>biru biru biru biru biru biru biru biru&nbsp;<span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru.</span></p><p><span style=\"font-size: 1rem;\"><br></span></p><p>biru biru biru biru biru biru biru biru&nbsp;<span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru&nbsp;</span><span style=\"font-size: 1rem;\">biru biru biru biru biru biru biru biru.</span><span style=\"font-size: 1rem;\"><br></span></p>', 'S, M, L, XL', 'Blue', '<p>shipping and returns</p>', '14,17,20,26', 320.00, 350.00, 25, 13, NULL, 'yes', 'FJV', '213', 'yes', 0, 1, '2024-04-03 01:19:33', '2024-04-17 03:38:34'),
-(23, 'Rhude Brentwood Jacket', 'rhude-brentwood-jacket', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?<br></p>', 'M, L, XL', 'Gray', '<p>Shipping</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?<br></p>', '8,15,19,21', 207.00, 220.00, 26, 19, NULL, 'yes', 'M49', '163', 'yes', 17, 1, '2024-04-04 03:03:12', '2024-04-17 04:08:47'),
+(23, 'Rhude Brentwood Jacket', 'rhude-brentwood-jacket', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?<br></p>', 'M, L, XL', 'Gray', '<p>Shipping</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem delectus, ratione necessitatibus voluptatem architecto debitis reprehenderit veritatis amet atque excepturi illo quas impedit aut ipsa fugiat laudantium sapiente, voluptatibus explicabo?<br></p>', '8,15,19,21', 207.00, 220.00, 26, 19, NULL, 'yes', 'M49', '163', 'yes', 15, 1, '2024-04-04 03:03:12', '2024-06-08 02:47:36'),
 (24, 'Denim Jacket', 'denim-jacket', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', 'All Size', 'Denim', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', '8,12,19,23', 300.00, 400.00, 26, 19, NULL, 'yes', 'WLS', '374', 'yes', 53, 1, '2024-04-04 03:27:02', '2024-04-17 03:56:45'),
-(25, 'Hacheads Shirt Hoodie', 'hacheads-shirt-hoodie', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', 'S, M, L, XL', 'Black', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', '12,16,23,24', 430.00, 500.00, 26, 24, NULL, 'yes', 'IE6', '421', 'yes', 6, 1, '2024-04-04 03:32:13', '2024-04-19 01:46:35'),
+(25, 'Hacheads Shirt Hoodie', 'hacheads-shirt-hoodie', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', 'S, M, L, XL', 'Black', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', '12,16,23,24', 430.00, 500.00, 26, 24, NULL, 'yes', 'IE6', '421', 'yes', 4, 1, '2024-04-04 03:32:13', '2024-06-01 03:16:29'),
 (26, 'Wool Cardigan Jun', 'wool-cardigan-jun', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', 'S, M, L, XL', 'Gray', '<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?<br></p>', '23,25,24,12', 120.00, 150.00, 26, 22, NULL, 'yes', 'BZW', '543', 'no', 0, 1, '2024-04-04 03:34:46', '2024-04-20 11:15:44'),
-(27, 'Hoodie Supreme', 'hoodie-supreme', '<p style=\"vertical-align: baseline; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; text-rendering: optimizelegibility; font-family: Poppins; line-height: 1.5; color: rgb(0, 29, 61);\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p style=\"vertical-align: baseline; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; text-rendering: optimizelegibility; font-family: Poppins; line-height: 1.5; color: rgb(0, 29, 61); outline: none !important;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p>', 'S, M, L, XL', 'Gray', '<p>yaayyaya&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie:</span></p><ol><li><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie</span></span></li><li><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span></span></span></li><li><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span>yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie</span><br></span><br></span><br></span></li></ol>', '15,19,25,26', 120.00, 150.00, 28, 10, NULL, 'yes', 'NUI', '479', 'yes', 7, 1, '2024-04-15 06:50:17', '2024-04-18 10:03:29');
+(27, 'Hoodie Supreme', 'hoodie-supreme', '<p style=\"vertical-align: baseline; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; text-rendering: optimizelegibility; font-family: Poppins; line-height: 1.5; color: rgb(0, 29, 61);\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p><p style=\"vertical-align: baseline; -webkit-tap-highlight-color: transparent; -webkit-font-smoothing: antialiased; text-rendering: optimizelegibility; font-family: Poppins; line-height: 1.5; color: rgb(0, 29, 61); outline: none !important;\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet assumenda officiis dolorem deserunt debitis blanditiis possimus tenetur soluta veniam, laudantium fugiat reiciendis error omnis veritatis voluptates minus beatae dolor non?</p>', 'S, M, L, XL', 'Gray', '<p>yaayyaya&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie:</span></p><ol><li><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie</span></span></li><li><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span></span></span></li><li><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\"><span style=\"font-size: 1rem;\">yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span>yongbookie&nbsp;<span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie&nbsp;</span><span style=\"font-size: 1rem;\">yongbookie</span><br></span><br></span><br></span></li></ol>', '15,19,25,26', 120.00, 150.00, 28, 10, NULL, 'yes', 'NUI', '479', 'yes', 5, 1, '2024-04-15 06:50:17', '2024-05-27 07:07:20');
 
 -- --------------------------------------------------------
 
@@ -760,7 +788,8 @@ INSERT INTO `product_ratings` (`id`, `product_id`, `username`, `email`, `comment
 (10, 15, 'Xu Minghao', 'haosaranghao@gmail.com', 'maaf, aku anti horanghae', 1.00, 0, '2024-04-17 16:04:44', '2024-04-17 16:04:44'),
 (11, 12, 'Xu Minghao', 'haosaranghao@gmail.com', 'SALUTE', 3.00, 0, '2024-04-17 16:05:30', '2024-04-17 16:05:30'),
 (12, 18, 'Muhamad Ali', 'ali@gmail.com', 'han ilofyu', 5.00, 0, '2024-04-19 00:48:37', '2024-04-19 00:48:37'),
-(13, 15, 'Vernon Chwe', 'bonon@gmail.com', 'aku suka horanghae\r\n\r\n(ini admin yg nulis)', 5.00, 0, '2024-04-20 09:53:48', '2024-04-20 09:53:48');
+(13, 15, 'Vernon Chwe', 'bonon@gmail.com', 'aku suka horanghae\r\n\r\n(ini admin yg nulis)', 5.00, 0, '2024-04-20 09:53:48', '2024-04-20 09:53:48'),
+(14, 20, 'Vernon Chwe', 'bonon@gmail.com', 'cantik', 5.00, 0, '2024-06-06 08:46:48', '2024-06-06 08:46:48');
 
 -- --------------------------------------------------------
 
@@ -784,7 +813,9 @@ INSERT INTO `shipping_charges` (`id`, `country_id`, `amount`, `created_at`, `upd
 (1, '101', 20.00, '2024-04-07 00:11:48', '2024-04-07 07:32:18'),
 (3, 'rest_of_world', 50.00, '2024-04-07 00:13:46', '2024-04-07 20:38:06'),
 (4, '1', 30.00, '2024-04-07 21:32:56', '2024-04-07 21:32:56'),
-(5, '45', 25.00, '2024-04-17 23:30:24', '2024-04-17 23:30:24');
+(5, '45', 25.00, '2024-04-17 23:30:24', '2024-04-17 23:30:24'),
+(6, '115', 25.00, '2024-06-08 02:46:51', '2024-06-08 02:46:51'),
+(7, '109', 24.00, '2024-06-08 06:22:45', '2024-06-08 06:22:45');
 
 -- --------------------------------------------------------
 
@@ -868,10 +899,22 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `phone`, `email_verified_at`, `password`, `role`, `status`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'admin@clothes.ku', NULL, NULL, '$2y$10$0QJcgUj.t.OUZQIRoafF1.iWhGG5Uhd4XUtxY34zi1m7vBf3yDhCm', 1, 1, NULL, '2024-03-29 15:36:14', '2024-04-14 07:33:48'),
-(3, 'Muhamad Ali', 'ali@gmail.com', '089212314212', NULL, '$2y$10$5Iq/ys98ydvKGifKdCPN9uc1.1PYT8VdFyLhDfkxwWpYDAWZjXOtC', 0, 1, NULL, '2024-04-06 01:59:14', '2024-04-06 01:59:14'),
+(3, 'Muhamad Ali', 'ali@gmail.com', '089212314212', NULL, '$2y$10$5Iq/ys98ydvKGifKdCPN9uc1.1PYT8VdFyLhDfkxwWpYDAWZjXOtC', 0, 1, NULL, '2024-03-06 01:59:14', '2024-04-06 01:59:14'),
 (4, 'Vernon Chwe', 'bonon@gmail.com', '021393192102', NULL, '$2y$10$1L1Wu4x9Ih5wdW1U31nvquK9mV19LVuHf8jxQFSGnVDjn7CIHoFa.', 0, 1, NULL, '2024-04-06 02:07:54', '2024-04-06 02:07:54'),
 (5, 'Joshua Hong', 'joshushu@gmail.com', '088888888888', NULL, '$2y$10$indNLD5UCPx9Mx6XAPxjROzKfFQu0l2qNAhEZouFsL2hTOtjERHvu', 0, 1, NULL, '2024-04-12 10:28:36', '2024-04-13 13:03:14'),
-(6, 'Xu Minghao', 'haosaranghao@gmail.com', '021393192102', NULL, '$2y$10$sBnMvqJxWYMKBm6QiRgZE.QmKVt/lntV7fFn1XMzkTTu4r6aUuxg6', 0, 0, NULL, '2024-04-14 01:09:29', '2024-04-14 06:36:18');
+(6, 'Minghao Xu', 'haosaranghao@gmail.com', '021393192102', NULL, '$2y$10$sBnMvqJxWYMKBm6QiRgZE.QmKVt/lntV7fFn1XMzkTTu4r6aUuxg6', 0, 0, NULL, '2024-05-14 01:09:29', '2024-05-25 16:14:25'),
+(7, 'Hoshi Kwon', 'hoshi@gmail.com', NULL, NULL, '$2y$10$9A4M3UA/UN/.SBlX1gCeKukoIgNszSOI.yd.jfBcLHjJVFYCbdE.W', 0, 1, NULL, '2024-06-02 11:51:31', '2024-06-02 11:51:31'),
+(8, 'Seungcheol Choi', 'scoups@gmail.com', NULL, NULL, '$2y$10$T4AEAlp4XKasZiE6RUKv1evs5gQ76IC.A5SOSKqxMsA506EgbmsG6', 0, 1, NULL, '2024-06-03 01:04:11', '2024-06-03 01:04:11'),
+(9, 'Jeonghan Yoon', 'jeonghan@gmail.com', NULL, NULL, '$2y$10$SqCvdbsMntLwCabZfCkO4.O3t2nqDnNjan2yjgD3mTm.OR5xDLePC', 0, 1, NULL, '2024-06-03 01:05:19', '2024-06-03 01:05:19'),
+(10, 'Junhui Wein', 'jun@gmail.com', '1232142124', NULL, '$2y$10$PFRYl2b.fH9rp6OBdevFcOfYpgg3Qcfvrs3aDp8314BMAjrZqBinC', 0, 1, NULL, '2024-06-03 01:05:56', '2024-06-08 10:44:32'),
+(11, 'Wonwoo Jeon', 'wonwoo@gmail.com', NULL, NULL, '$2y$10$WSaS4ysN9ywnVIOJCMieMuvk/61b.9OM8vPWcwpHfUNzao6ct2eLm', 0, 1, NULL, '2024-06-03 01:06:56', '2024-06-03 01:06:56'),
+(12, 'Jihoon Lee', 'woozi@gmail.com', '021393192102', NULL, '$2y$10$7J/u/Uxu0feIcfwU9loa1eya.YqzRYiE5tCUTNAtRXGTv2cwcZz7O', 0, 1, NULL, '2024-06-03 01:08:13', '2024-06-03 06:55:14'),
+(13, 'Mingyu Kim', 'mingyu@gmail.com', NULL, NULL, '$2y$10$gbUOISV0guUf5biikEZqqet8QDfEm8l7cU9UAQfj7gebCoBPUxq8i', 0, 1, NULL, '2024-06-03 01:09:13', '2024-06-03 01:09:13'),
+(14, 'Dokyeom Lee', 'dokyeom@gmail.com', NULL, NULL, '$2y$10$hIWX23vd1eDpM6nYPi54YuMpL2E6TypbCw1jg09V/GtOrAtifvFv2', 0, 1, NULL, '2024-06-03 01:11:35', '2024-06-03 01:11:35'),
+(15, 'Seungkwan Boo', 'seungkwan@gmail.com', NULL, NULL, '$2y$10$QULRl26yP1mv7FJ7yuOWVu7eq0fLCZf0RBMip7cTCkiuwPqUduAlq', 0, 1, NULL, '2024-06-03 01:14:15', '2024-06-03 01:14:15'),
+(16, 'Chan Lee', 'dino@gmail.com', NULL, NULL, '$2y$10$l7uOvWbyK5Xtvu9WKnDHBecCBkX0bPAQK1dMCZnwdgs7UZYUQJtI6', 0, 1, NULL, '2024-06-03 01:14:57', '2024-06-03 01:14:57'),
+(17, 'Kohaku Oukawa', 'oukohaku@gmail.com', NULL, NULL, '$2y$10$yivwH6oysxh0XS9Ek4bYSumxbi.Zj8G6PhfcZcprnDNrRg31c2IdK', 0, 1, NULL, '2024-06-07 06:21:26', '2024-06-08 06:21:26'),
+(18, 'Owner', 'owner@clothes.ku', NULL, NULL, '$2y$10$/3fiB/3P5S53wfdFsmcn6OlaYqQ5hgnd5sfg1VELlhA2WPusKoki6', 2, 1, NULL, '2024-06-09 01:50:30', '2024-06-09 01:50:30');
 
 -- --------------------------------------------------------
 
@@ -898,7 +941,9 @@ INSERT INTO `wishlists` (`id`, `user_id`, `product_id`, `created_at`, `updated_a
 (12, 4, 8, '2024-04-16 15:48:23', '2024-04-16 15:48:23'),
 (13, 5, 27, '2024-04-17 05:00:18', '2024-04-17 05:00:18'),
 (14, 4, 16, '2024-04-20 09:54:47', '2024-04-20 09:54:47'),
-(15, 4, 23, '2024-04-20 11:21:49', '2024-04-20 11:21:49');
+(15, 4, 23, '2024-04-20 11:21:49', '2024-04-20 11:21:49'),
+(16, 12, 26, '2024-06-03 07:21:20', '2024-06-03 07:21:20'),
+(17, 12, 24, '2024-06-03 07:21:31', '2024-06-03 07:21:31');
 
 --
 -- Indexes for dumped tables
@@ -1068,7 +1113,7 @@ ALTER TABLE `countries`
 -- AUTO_INCREMENT for table `customer_addresses`
 --
 ALTER TABLE `customer_addresses`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `discount_coupons`
@@ -1092,13 +1137,13 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `pages`
@@ -1128,13 +1173,13 @@ ALTER TABLE `product_images`
 -- AUTO_INCREMENT for table `product_ratings`
 --
 ALTER TABLE `product_ratings`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `shipping_charges`
 --
 ALTER TABLE `shipping_charges`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `sub_categories`
@@ -1152,13 +1197,13 @@ ALTER TABLE `temp_images`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `wishlists`
 --
 ALTER TABLE `wishlists`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- Constraints for dumped tables

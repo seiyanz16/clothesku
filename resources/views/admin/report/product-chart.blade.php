@@ -100,6 +100,7 @@
                     success: function(data) {
                         var dataPoints = data.map(function(product) {
                             return {
+                                label: product.name + " $" + product.total_price,
                                 y: Number(product.total_qty)//INI MASALAH BANGET SEHARIAN CUMA GEGARA NIH STRING ASU ASU, solv: Number()
                             };
                         });
@@ -111,7 +112,7 @@
             function renderChart(dataPoints) {
                 var chart = new CanvasJS.Chart("chartContainer", {
                     animationEnabled: true,
-                    theme: "light2",
+                    theme: "    light2",
                     title: {
                         text: "Best Selling Products"
                     },
