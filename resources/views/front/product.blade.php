@@ -176,6 +176,8 @@
                                     <div class="row">
                                         @if (Auth::check())
                                             <form action="" method="post" name="reviewForm" id="reviewForm">
+                                                <div id="general-error" class="alert alert-danger"
+                                                    style="display: none;"></div>
                                                 <h3 class="h4 pb-3">Write a Review</h3>
                                                 {{-- <div class="form-group col-md-6 mb-3">
                                                 <label for="name">Name</label>
@@ -408,38 +410,50 @@
                     var errors = response.errors;
 
                     if (response.status == false) {
-                        if (errors.name) {
-                            $('#name').addClass('is-invalid').siblings('p').addClass('invalid-feedback')
-                                .html(errors.name);
+                        if (response.message) {
+                            $('#general-error').html(response.message).show();
                         } else {
-                            $('#name').removeClass('is-invalid').siblings('p').removeClass(
-                                'invalid-feedback').html('');
+                            $('#general-error').hide();
                         }
+                        if (errors) {
 
-                        if (errors.email) {
-                            $('#email').addClass('is-invalid').siblings('p').addClass(
-                                'invalid-feedback').html(errors.email);
-                        } else {
-                            $('#email').removeClass('is-invalid').siblings('p').removeClass(
-                                'invalid-feedback').html('');
-                        }
+                            if (errors.name) {
+                                $('#name').addClass('is-invalid').siblings('p').addClass(
+                                        'invalid-feedback')
+                                    .html(errors.name);
+                            } else {
+                                $('#name').removeClass('is-invalid').siblings('p').removeClass(
+                                    'invalid-feedback').html('');
+                            }
 
-                        if (errors.comment) {
-                            $('#comment').addClass('is-invalid').siblings('p').addClass(
-                                'invalid-feedback').html(errors.comment);
-                        } else {
-                            $('#comment').removeClass('is-invalid').siblings('p').removeClass(
-                                'invalid-feedback').html('');
-                        }
+                            if (errors.email) {
+                                $('#email').addClass('is-invalid').siblings('p').addClass(
+                                    'invalid-feedback').html(errors.email);
+                            } else {
+                                $('#email').removeClass('is-invalid').siblings('p').removeClass(
+                                    'invalid-feedback').html('');
+                            }
 
-                        if (errors.rating) {
-                            $('.product-rating-error').html(errors.rating);
-                        } else {
-                            $('.product-rating-error').html('');
+                            if (errors.comment) {
+                                $('#comment').addClass('is-invalid').siblings('p').addClass(
+                                    'invalid-feedback').html(errors.comment);
+                            } else {
+                                $('#comment').removeClass('is-invalid').siblings('p').removeClass(
+                                    'invalid-feedback').html('');
+                            }
+
+                            if (errors.rating) {
+                                $('.product-rating-error').html(errors.rating);
+                            } else {
+                                $('.product-rating-error').html('');
+                            }
                         }
                     } else {
                         window.location.href = '{{ route('front.product', $product->slug) }}'
                     }
+                },
+                error: function(xhr) {
+                    $('#general-error').html('An error occurred. Please try again later.').show();
                 }
             })
         })

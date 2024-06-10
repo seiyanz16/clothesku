@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\SubCategory;
 use App\Models\Brand;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductRating;
 use Illuminate\Support\Facades\Auth;
@@ -134,6 +135,19 @@ class ShopController extends Controller
             return response()->json([
                 'status' => false,
                 'errors' => $validator->errors()
+            ]);
+        }
+
+        // cek apa user udah beli apa belom
+        $hasPurchased = Order::whereHas('items', function ($query) use ($id) {
+            $query->where('product_id', $id);
+        })->where('user_id', Auth::id())->exists();
+
+        if (!$hasPurchased) {
+            session()->flash('error', 'You can only rate products you have purchased.');
+            return response()->json([
+                'status' => false,
+                'message' => 'You can only rate products you have purchased.'
             ]);
         }
 
